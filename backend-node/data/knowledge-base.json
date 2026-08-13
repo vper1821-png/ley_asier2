@@ -1,0 +1,811 @@
+{
+  "documents": [
+    {
+      "id": "mr3kql9veeq7",
+      "text": " K3s es una versión ligera de Kubernetes optimizada para dispositivos edge y IoT. Su objetivo es simplificar la implementación y el mantenimiento de clusters Kubernetes en estas plataformas.\n\nPara instalar K3s, puedes seguir los siguientes pasos:\n\n1. Descarga la versión más reciente de K3s desde la página oficial (https://rancher.com/docs/k3s/latest/en/installation/).\n\n2. Ejecuta el archivo de instalación con permisos de superusuario: `sudo sh k3s-arm64.sh` (para ARM64) o `sudo sh k3s-amd64.sh` (para AMD64).\n\n3. Durante la instalación, se te pedirá una contraseña para el servicio de autenticación de Kubernetes. Guarda esta información ya que serás necesario para acceder al cluster y realizar operaciones como crear o eliminar pods.\n\n4. Una vez finalizada la instalación, K3s iniciará automáticamente el servicio y configurará el cluster.\n\nPara administrar el cluster, puedes utilizar los siguientes comandos:\n\n- `sudo kubectl get nodes`: Muestra la información de todos los nodos del cluster.\n- `sudo kubectl create deployment nginx --image=nginx`: Creará un nuevo deploymente llamado \"nginx\" con una imagen de Nginx.\n- `sudo kubectl expose deployment nginx --type=LoadBalancer --port=80`: Expondrá el deploymente \"nginx\" en el puerto 80 y creará un servicio LoadBalancer para acceder al mismo.\n- `sudo kubectl delete deployment nginx`: Eliminará el deploymente \"nginx\".\n\nLas mejores prácticas incluyen la seguridad de los datos, la planificación de recursos y la monitorización del cluster para garantizar su rendimiento. También es recomendable utilizar herramientas como Helm o FluxCD para automatizar la gestión de aplicaciones en K3s.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T14:02:44.659Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3kqojuuolp",
+      "text": " P: ¿Cómo se puede descargar la versión más reciente de K3s?\nR: Se puede descargar la versión más reciente de K3s desde la página oficial (https://rancher.com/docs/k3s/latest/en/installation/)\n\nP: ¿Cómo se puede ejecutar el archivo de instalación de K3s?\nR: Se ejecuta el archivo de instalación con permisos de superusuario, por ejemplo `sudo sh k3s-arm64.sh` (para ARM64) o `sudo sh k3s-amd64.sh` (para AMD64).\n\nP: ¿Cómo se puede crear un nuevo deploymente llamado \"nginx\" con una imagen de Nginx en K3s?\nR: Se puede crear un nuevo deploymente llamado \"nginx\" con una imagen de Nginx utilizando el comando `sudo kubectl create deployment nginx --image=nginx`.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T14:02:48.906Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3kr04p4e4u",
+      "text": " Automatización de despliegue de Kubernetes con pipeline de integración/entrega continua (CI/CD) permite automatizar el proceso de implementación y actualización de aplicaciones en un entorno Kubernetes.\n\nPara lograr esto, se utilizan herramientas como Jenkins, Travis CI o GitLab CI para definir, configurar y ejecutar pasos de integración y entrega continua en el ciclo de vida de la aplicación.\n\nPara implementar un pipeline de CI/CD en Kubernetes, se siguen los siguientes pasos:\n\n1. Definición del pipeline en un archivo YAML (ejemplo: Jenkinsfile o .gitlab-ci.yml) que describe las etapas y tareas a ejecutar en cada fase del ciclo de vida de la aplicación.\n2. Configuración de una instancia de Kubernetes (ejemplo: minikube, GKE, AKS) donde se desplegará la aplicación.\n3. Definición de un Dockerfile para construir una imagen Docker de la aplicación y sus dependencias.\n4. Utilización de herramientas como Helm o Kustomize para definir y desplegar aplicaciones en Kubernetes.\n5. Configuración del pipeline para ejecutar las tareas de integración y entrega continua, incluyendo la construcción de la imagen Docker, pruebas unitarias y funcionales, despliegues en ambientes de prueba y producción, entre otras.\n6. Configuración del pipeline para notificar al equipo de desarrollo y operaciones sobre el estado del despliegue, incluyendo errores y excepciones.\n\nAlgunos ejemplos prácticos de comandos y configuraciones para automatizar el despliegue de Kubernetes con CI/CD pipelines son:\n\n- Definición de un pipeline en Jenkinsfile:\n```yaml\npipeline {\n    agent any\n    stages {\n        stage('Build') {\n            steps {\n                sh 'docker build -t myapp .'\n            }\n        }\n        stage('Deploy') {\n            steps {\n                sh 'kubectl apply -f deployment.yaml'\n            }\n        }\n    }\n}\n```\n- Definición de un pipeline en .gitlab-ci.yml:\n```yaml\nimage: docker:latest\n\nstages:\n  - build\n  - deploy\n\nbuild_job:\n  stage: build\n  script:\n    - docker build -t myapp .\n\ndeploy_job:\n  stage: deploy\n  script:\n    - kubectl apply -f deployment.yaml\n```\nEn cuanto a mejores prácticas, se recomiendan utilizar herramientas como Helm o Kustomize para definir y desplegar aplicaciones en Kubernetes, ya que facilitan la gestión de configuraciones y recursos compartidos entre múltiples aplicaciones. También es importante definir pasos de pruebas unitarias y funcionales en el pipeline para garantizar la calidad del código antes de su despliegue en ambientes de producción. Finalmente, se recomienda utilizar herramientas como Canary o Blue/Green para desplegar nuevas versiones de la aplicación sin interrumpir el servicio en producción.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T14:03:03.913Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3kr48uq9eq",
+      "text": " P1: ¿Qué es el automatización de despliegue de Kubernetes con pipeline de integración/entrega continua (CI/CD)?\nR1: El automatizado despliegue de Kubernetes con CI/CD es un proceso que permite automatizar la implementación y actualización de aplicaciones en un entorno Kubernetes. Se utiliza para definir, configurar y ejecutar pasos de integración y entrega continua en el ciclo de vida de la aplicación.\n\nP2: ¿Qué herramientas se utilizan para definir y ejecutar pasos de CI/CD en Kubernetes?\nR2: Las herramientas que se utilizan para definir y ejecutar pasos de CI/CD en Kubernetes incluyen Jenkins, Travis CI, GitLab CI, Helm y Kustomize.\n\nP3: ¿Qué es el Dockerfile y por qué es importante en el despliegue de aplicaciones en Kubernetes?\nR3: El Dockerfile es un archivo que contiene instrucciones para construir una imagen Docker de la aplicación y sus dependencias. Es importante en el despliegue de aplicaciones en Kubernetes porque permite crear una imagen estandarizada de la aplicación, facilitando su implementación y mantenimiento en un entorno de contenedores.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T14:03:09.246Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3kz4ruikwh",
+      "text": " K3s es una versión ligera de Kubernetes optimizada para dispositivos pequeños y edge computing. Se implementa mediante el siguiente proceso básico:\n\n1. Descarga e instalación del binario de K3s en cada nodo del cluster, utilizando comandos como `curl -sfL https://get.k3s.io | sh`.\n2. Configuración del servidor maestro (servidor principal) con la opción `--server` al instalar el binario de K3s.\n3. Agrega los nodos trabajadores al cluster mediante su IP y token de autenticación generado durante la instalación del servidor maestro.\n4. Verificación del estado del cluster con comandos como `k3s kubectl get nodes`.\n5. Configuración de las aplicaciones en el cluster utilizando YAML manifests y el comando `k3s kubectl apply -f <manifesto.yaml>`.\n6. Para actualizaciones del clúster, se utiliza el comando `sudo systemctl restart k3s` en cada nodo.\n\nPara mejorar la seguridad y gestión de tareas, se recomiendan las siguientes prácticas:\n\n1. Configuración de autenticación y autorización a través de RBAC (Roles Based Access Control) y Webhook.\n2. Uso de certificados SSL en toda la comunicación entre componentes del clúster.\n3. Implementación de un dashboard como Heapster, Prometheus o Grafana para monitorear el estado del cluster.\n4. Configuración de backups y restores de los datos importantes del clúster.\n5. Uso de herramientas de orquestación como Helm o Kustomize para la gestión de aplicaciones en el clúster.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T14:09:23.178Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3kz6dnwaeu",
+      "text": " P1: ¿Cómo se instala el binario de K3s en cada nodo del cluster?\nR1: Se instala utilizando el comando `curl -sfL https://get.k3s.io | sh`.\n\nP2: ¿Cómo agregas los nodos trabajadores al cluster?\nR2: Los nodos trabajadores se agregan al cluster mediante su IP y token de autenticación generado durante la instalación del servidor maestro.\n\nP3: ¿Cómo verificas el estado del cluster después de su configuración?\nR3: El estado del cluster se puede verificar con comandos como `k3s kubectl get nodes`.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T14:09:25.259Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3kzcmin4ve",
+      "text": " Automatización de despliegue de Kubernetes con CI/CD (Integración Continua / Despliegue Continuo) se refiere a la implementación de procesos automáticos para el desarrollo, compilación, prueba y despliegue de aplicaciones en un entorno Kubernetes.\n\nPara lograr esto, se utilizan herramientas de CI/CD como Jenkins, Travis CI o CircleCI, combinadas con plugins específicos para Kubernetes como kubectl o Helm.\n\nEn el caso de Jenkins, por ejemplo, se utiliza un plugin llamado \"Kubernetes Plugin\" que permite la integración directa con un clúster Kubernetes y ejecutar comandos kubectl en automático.\n\nPara desplegar una aplicación mediante Jenkins y Helm, se siguen los siguientes pasos:\n\n1. Configurar el plugin \"Kubernetes Plugin\" con las credenciales del clúster Kubernetes.\n2. Crear un script Helm (Tiller) que contenga la definición de la aplicación y sus dependencias.\n3. Configurar un Jenkinsfile en el repositorio de código fuente, que defina los pasos para el despliegue mediante Helm.\n4. Inicializar un pipeline en Jenkins desde el Jenkinsfile, lo que iniciará la ejecución del script Helm y automáticamente desplegará la aplicación en el clúster Kubernetes.\n\nEn términos de mejores prácticas, se recomienda:\n\n1. Utilizar una estrategia de despliegue basada en etiquetas para controlar las versiones de la aplicación.\n2. Implementar un proceso de validación antes del despliegue (por ejemplo, con tests unitarios o integración) para garantizar la calidad de la aplicación.\n3. Utilizar una estrategia de despliegue basada en canales para controlar el acceso al entorno de producción y minimizar los riesgos de fallos.\n4. Implementar un proceso de monitoreo y alertas para detectar anomalías en tiempo real y tomar medidas correctivas.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T14:09:33.354Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3kzhtonzzp",
+      "text": " P1: ¿Qué es la automatización de despliegue de Kubernetes con CI/CD?\nR1: La automatización de despliegue de Kubernetes con CI/CD se refiere a la implementación de procesos automáticos para el desarrollo, compilación, prueba y despliegue de aplicaciones en un entorno Kubernetes.\n\nP2: ¿Cómo se utiliza Jenkins para desplegar una aplicación mediante Helm en Kubernetes?\nR2: Para desplegar una aplicación mediante Jenkins y Helm, se siguen los siguientes pasos: 1) Configurar el plugin \"Kubernetes Plugin\" con las credenciales del clúster Kubernetes. 2) Crear un script Helm (Tiller) que contenga la definición de la aplicación y sus dependencias. 3) Configurar un Jenkinsfile en el repositorio de código fuente, que defina los pasos para el despliegue mediante Helm. 4) Inicializar un pipeline en Jenkins desde el Jenkinsfile, lo que iniciará la ejecución del script Helm y automáticamente desplegará la aplicación en el clúster Kubernetes.\n\nP3: ¿Qué mejores prácticas se recomiendan para el despliegue de aplicaciones en Kubernetes con CI/CD?\nR3: Las mejores prácticas para el despliegue de aplicaciones en Kubernetes con CI/CD incluyen: 1) Utilizar una estrategia de despliegue basada en etiquetas para controlar las versiones de la aplicación. 2) Implementar un proceso de validación antes del despliegue (por ejemplo, con tests unitarios o integración) para garantizar la calidad de la aplicación. 3) Utilizar una estrategia de despliegue basada en canales para controlar el acceso al entorno de producción y minimizar los riesgos de fallos. 4) Implementar un proceso de monitoreo y alertas para detectar anomalias en tiempo real y tomar medidas correctivas.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T14:09:40.092Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3n40uquarh",
+      "text": " Kubernetes Security Best Practices y Pod Security Policies son medidas que se implementan para proteger los clusters de Kubernetes de ataques cibernéticos y garantizar la seguridad de las aplicaciones.\n\n1. **Network Policies**: Controlan el tráfico entre pods, servicios y otros recursos del cluster. Se configura mediante YAML:\n\n```yaml\napiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata:\n  name: deny-all\nspec:\n  podSelector: {}\n  policyTypes:\n  - Ingress\n  - Egress\n```\n\n2. **Role Based Access Control (RBAC)**: Permite controlar los permisos de acceso a recursos del cluster mediante roles y funciones. Configuración de RBAC:\n\n```yaml\napiVersion: rbac.authorization.k8s.io/v1\nkind: ClusterRoleBinding\nmetadata:\n  name: admin-user\nroleRef:\n  apiGroup: rbac.authorization.k8s.io\n  kind: ClusterRole\n  name: cluster-admin\nsubjects:\n- apiGroup: rbac.authorization.k8s.io\n  kind: User\n  name: user1\n```\n\n3. **Pod Security Policies**: Son políticas que se aplican a los pods para controlar su comportamiento y evitar vulnerabilidades. Se crean mediante YAML:\n\n```yaml\napiVersion: policy/v1beta1\nkind: PodSecurityPolicy\nmetadata:\n  name: restricted-psp\nspec:\n  seLinux:\n    rule: RunAsUser\n  runAsUser:\n    type: MustRunAsNonRoot\n  fsGroup:\n    rule: RunAsAny\n  supplementalGroups:\n    min: 1\n    max: 2047\n```\n\n4. **Mutating Admission Controllers**: Son plugins que modifican los objetos de Kubernetes antes de su aprobación, para garantizar la seguridad del cluster. Se configura mediante YAML:\n\n```yaml\napiVersion: admissions.k8s.io/v1beta1\nkind: MutatingWebhookConfiguration\nmetadata:\n  name: my-webhook-config\nwebhooks:\n- name: my-mutating-webhook\n  rules:\n  - apiGroups: [\"\"]\n    apiVersions: [\"*\"]\n    resources: [\"*\"]\nurl: http://my-webhook-service:8080/mutate\n```\n\n5. **Registro de eventos y auditoría**: Es importante registrar los eventos del cluster para detectar posibles ataques y tomar acciones correctivas. Se puede configurar mediante el uso de plugins como Fluentd o el servicio de registro de Google Cloud.\n\nLas mejores prácticas incluyen regularmente actualizar las versiones de Kubernetes, limitar los privilegios de usuario, utilizar certificados SSL y implementar seguridad en la red.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes security best practices and pod security policies",
+        "source": "self-study",
+        "studySession": 3
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T15:09:10.610Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3n4343fxp7",
+      "text": " 1. **Pregunta:** ¿Qué es un Network Policy en Kubernetes y cómo se configura?\n   **Respuesta:** Un Network Policy en Kubernetes controla el tráfico entre pods, servicios y otros recursos del cluster. Se configura mediante YAML.\n\n2. **Pregunta:** ¿Qué es Role Based Access Control (RBAC) en Kubernetes y cómo se configura?\n   **Respuesta:** Role Based Access Control (RBAC) permite controlar los permisos de acceso a recursos del cluster mediante roles y funciones. Se configuración de RBAC se realiza mediante YAML.\n\n3. **Pregunta:** ¿Qué son las Pod Security Policies en Kubernetes y cómo se crean?\n   **Respuesta:** Las Pod Security Policies son políticas que se aplican a los pods para controlar su comportamiento y evitar vulnerabilidades. Se crean mediante YAML.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes security best practices and pod security policies",
+        "source": "self-study-qa",
+        "studySession": 3
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T15:09:13.539Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3n49di3k5g",
+      "text": " Linux Server Automation con Ansible y scripts de shell se utiliza para simplificar la administración y gestión de varios servidores Linux.\n\nAnsible es una herramienta de código abierto para automatización de tareas en sistemas Unix-like, incluyendo Linux. Permite configurar y administrar múltiples servidores remotos desde un solo host local. Ansible funciona mediante la ejecución de comandos SSH sobre los servidores remotos y estableciendo conexiones entre ellos utilizando inventarios.\n\nPara comenzar, instale Ansible en el host local:\n```bash\nsudo apt-get update\nsudo apt-get install ansible\n```\nCree un archivo de playbook (configuración) llamado `my_playbook.yml` con las siguientes líneas:\n```yaml\n---\n- hosts: all\n  become: yes\n  tasks:\n    - name: Install Apache\n      apt:\n        name: apache2\n        state: present\n```\nEste playbook instala Apache en todos los servidores remotos incluidos en el inventario. Para ejecutar el playbook, use el siguiente comando:\n```bash\nansible-playbook my_playbook.yml\n```\nPara automatización más avanzada y personalizada, se pueden utilizar scripts de shell dentro de los playbooks de Ansible. Por ejemplo, para crear un script de shell llamado `install_mysql.sh`, cree el archivo en el directorio `/usr/local/bin`:\n```bash\n#!/bin/bash\napt-get update\napt-get install -y mysql-server\n```\nLuego, agregue la tarea de ejecución del script de shell al playbook:\n```yaml\ntasks:\n  - name: Install MySQL\n    command: /usr/local/bin/install_mysql.sh\n```\nPara mejorar la seguridad y eficiencia, se recomienda utilizar roles en Ansible, configuración de inventario, variables de entorno, control de versiones, y pruebas unitarias con Molecule.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Linux server automation with Ansible and shell scripts",
+        "source": "self-study",
+        "studySession": 4
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T15:09:21.654Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3n4clp70mt",
+      "text": " P1: What is the purpose of using Ansible for Linux Server Automation?\nR1: The purpose of using Ansible for Linux Server Automation is to simplify the administration and management of multiple Linux servers by configuring and administering them from a single local host. It achieves this through the execution of SSH commands on remote servers and establishing connections between them using inventories.\n\nP2: How can you install Apache on all servers included in the inventory using Ansible?\nR2: To install Apache on all servers included in the inventory using Ansible, create a playbook called `my_playbook.yml` with the following lines:\n```yaml\n---\n- hosts: all\n  become: yes\n  tasks:\n    - name: Install Apache\n      apt:\n        name: apache2\n        state: present\n```\nThen, run the command `ansible-playbook my_playbook.yml`.\n\nP3: What is the purpose of creating a script called `install_mysql.sh` and how can it be used in an Ansible playbook?\nR3: The purpose of creating a script called `install_mysql.sh` is to automate the installation of MySQL server on Linux servers. To use this script in an Ansible playbook, first create the script in the directory `/usr/local/bin`, and then add the task of executing the script as follows:\n```yaml\ntasks:\n  - name: Install MySQL\n    command: /usr/local/bin/install_mysql.sh\n```",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Linux server automation with Ansible and shell scripts",
+        "source": "self-study-qa",
+        "studySession": 4
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T15:09:25.837Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3ojpnrmbdh",
+      "text": " Kubernetes (K8s) es una plataforma de código abierto para la orquestación de contenedores que permite administrar aplicaciones distribuidas en entornos multiplataforma. K3s es una implementación ligera y simplificada de Kubernetes diseñada para dispositivos IoT (Internet of Things) y otros entornos edge.\n\nPara instalar un clúster K3s, se necesitan al menos dos nodos con Linux (Raspberry Pi, Ubuntu, etc.) y una herramienta de línea de comandos como `curl` o `wget`.\n\n1. Descargue el archivo de instalación de K3s desde la página oficial:\n\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\n\n2. Para instalar en modo armado, agregue la opción `--server --node-taint node-role.kubernetes.io/master-`:\n\n```bash\ncurl -sfL https://get.k3s.io | K3S_URL=https://<server-ip>:6443 K3S_TOKEN=<token> sh -\n```\n\n3. Para obtener el token, ejecute:\n\n```bash\ncurl -sfL https://get.k3s.io | K3S_URL=https://<server-ip>:6443 sh -\n```\n\nEl servidor mostrará el token en la consola.\n\nPara verificar la instalación, ejecute:\n\n```bash\nsudo kubectl get pods --all-namespaces\n```\n\nK3s proporciona una interfaz de línea de comandos (CLI) similar a la de Kubernetes original. Algunos comandos útiles son:\n\n- `k3s kubectl get pods`: muestra los pods del clúster.\n- `k3s kubectl create deployment <nombre> --image=<imagen>`: crea un despliegue con una imagen de contenedor específica.\n- `k3s kubectl expose deployment <nombre> --port=<puerto> --type=LoadBalancer`: expone el puerto del despliegue como LoadBalancer.\n\nLas mejores prácticas incluyen configurar la seguridad de red, habilitar autoscaling y utilizar Helm para gestionar aplicaciones.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T15:49:22.215Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3ojszzeg2r",
+      "text": " 1. P: ¿Cómo se instala K3s en modo armado?\n   R: Para instalar un clúster de K3s en modo armado, ejecuta el siguiente comando:\n   ```bash\n   curl -sfL https://get.k3s.io | K3S_URL=https://<server-ip>:6443 K3S_TOKEN=<token> sh -\n   ```\n   Reemplaza `<server-ip>` con la dirección IP del servidor y el token proporcionado por el servidor al ejecutar la instalación sin armadura.\n\n2. P: ¿Cómo se obtiene el token para instalar K3s?\n   R: Para obtener el token, ejecute el siguiente comando:\n   ```bash\n   curl -sfL https://get.k3s.io | K3S_URL=https://<server-ip>:6443 sh -\n   ```\n   El servidor mostrará el token en la consola.\n\n3. P: ¿Cómo se crea un despliegue con una imagen de contenedor específica en K3s?\n   R: Para crear un despliegue con una imagen de contenedor específica, ejecuta el siguiente comando:\n   ```bash\n   k3s kubectl create deployment <nombre> --image=<imagen>\n   ```",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T15:49:26.543Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3ojzsssipz",
+      "text": " Automatización de despliegue de Kubernetes con CI/CD (Integración Continua / Implementación Continua) permite la automatización del proceso completo de desarrollo, pruebas y despliegue de aplicaciones en entornos Kubernetes.\n\nPara lograr esto, se utiliza una pipeline de CI/CD que incluye los siguientes pasos:\n\n1. **Git**: Se utiliza para almacenar el código fuente y realizar commits.\n\n2. **Build**: Se compila el código fuente en un contenedor Docker, generando una imagen de la aplicación.\n\n3. **Test**: Se ejecutan pruebas unitarias o integrales para verificar que la aplicación funcione correctamente.\n\n4. **Deploy**: Se despliega la aplicación en un entorno Kubernetes utilizando comandos como `kubectl apply`.\n\n5. **Monitoring**: Se monitorea el estado de la aplicación y se envía alertas si ocurren errores o anomalías.\n\nPara implementar una pipeline de CI/CD en Kubernetes, se pueden utilizar herramientas como Jenkins, GitLab CI/CD, CircleCI o Travis CI. Por ejemplo, con GitLab CI/CD, se crea un archivo `.gitlab-ci.yml` que define las etapas de la pipeline y los comandos a ejecutar en cada una.\n\nPor ejemplo:\n```yaml\nimage: docker:latest\n\nstages:\n  - build\n  - test\n  - deploy\n\nbuild_job:\n  stage: build\n  script:\n    - docker build -t my-app .\n\ntest_job:\n  stage: test\n  script:\n    - docker run --rm my-app /bin/sh -c \"make test\"\n\ndeploy_job:\n  stage: deploy\n  script:\n    - kubectl apply -f deployment.yaml\n```\nEn este ejemplo, se define una pipeline con tres etapas (build, test y deploy) y cada etapa tiene un job que realiza las tareas especificadas en el script. Se utiliza Docker para construir la imagen de la aplicación y `kubectl` para desplegarla en Kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T15:49:35.356Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3ok2koqt0n",
+      "text": " P: ¿Qué es la automatización de despliegue de Kubernetes con CI/CD?\nR: La automatización de despliegue de Kubernetes con CI/CD (Integración Continua / Implementación Continua) es un proceso completo que permite la automatización del desarrollo, pruebas y despliegue de aplicaciones en entornos Kubernetes.\n\nP: ¿Qué herramientas se pueden utilizar para implementar una pipeline de CI/CD en Kubernetes?\nR: Se pueden utilizar herramientas como Jenkins, GitLab CI/CD, CircleCI o Travis CI para implementar una pipeline de CI/CD en Kubernetes.\n\nP: ¿Qué hace el archivo `.gitlab-ci.yml` en un entorno de CI/CD?\nR: El archivo `.gitlab-ci.yml` se utiliza en GitLab CI/CD para definir las etapas de la pipeline y los comandos a ejecutar en cada una, incluyendo el lenguaje de programación utilizado, la imagen del contenedor Docker, las tareas de build, test y deploy, entre otras.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T15:49:38.952Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3qdj4zglbs",
+      "text": " K3s es una versión ligera de Kubernetes optimizada para dispositivos IoT y Edge computing. Se caracteriza por su bajo consumo de recursos y facilidad de implementación.\n\nPara instalar un cluster K3s, se necesita un servidor maestro (o múltiples si se desea una topología master-worker). Para ello, se puede usar la herramienta `k3sup` para automatizar el proceso.\n\nPrimero, instalar `k3sup` en el servidor maestro:\n```bash\ncurl -sLS https://get.k3sup.dev | sh\n```\nLuego, se configura el archivo `~/.k3sup/config.yaml` con las credenciales del servidor maestro y la información de los nodos trabajadores (opcional).\n\nPara instalar el cluster, ejecutar:\n```bash\nk3sup install --server --non-interactive -d /path/to/k3s-server\n```\nSe puede verificar la instalación con:\n```bash\nssh nodo_trabajador kubectl cluster-info\n```\nPara agregar un nodo trabajador, ejecutar:\n```bash\nk3sup install -d /path/to/k3s-worker --server <ip del servidor maestro>\n```\nLas mejores prácticas incluyen:\n- Utilizar la versión LTS de K3s.\n- Configurar seguridad adicional (TLS, RBAC).\n- Monitorear el estado del cluster y los pods.\n- Actualizar regularmente el cluster para mantenerlo actualizado.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T16:40:33.059Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3qdpbuffbb",
+      "text": " P: ¿Qué es K3s y por qué es útil en dispositivos IoT y Edge computing?\nR: K3s es una versión ligera de Kubernetes optimizada para dispositivos IoT y Edge computing. Es útil porque se caracteriza por su bajo consumo de recursos y facilidad de implementación, lo que permite la ejecución de aplicaciones en entornos con limitados recursos.\n\nP: ¿Cómo se instala un cluster K3s utilizando `k3sup`?\nR: Para instalar un cluster K3s, primero se necesita instalar `k3sup` en el servidor maestro mediante la siguiente línea de comandos: `curl -sLS https://get.k3sup.dev | sh`. Luego, se configura el archivo `~/.k3sup/config.yaml` con las credenciales del servidor maestro y la información de los nodos trabajadores (opcional). Para instalar el cluster, ejecutar: `k3sup install --server --non-interactive -d /path/to/k3s-server`.\n\nP: ¿Qué son algunas mejores prácticas para administrar un cluster K3s?\nR: Algunas mejores prácticas incluyen utilizar la versión LTS de K3s, configurar seguridad adicional (TLS, RBAC), monitorear el estado del cluster y los pods, y actualizar regularmente el cluster para mantenerlo actualizado.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T16:40:41.082Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3qe0c9490z",
+      "text": " Automatización de despliegue de Kubernetes con CI/CD (Integración Continua / Implementación Continua) implica la automatización del proceso de implementación de aplicaciones en un entorno Kubernetes mediante el uso de herramientas de CI/CD.\n\nPara lograr esto, se utilizan pasos definidos en un pipeline de trabajo (workflow), que incluyen compilación, pruebas unitarias y integrales, implementación y despliegue en Kubernetes.\n\nUna herramienta popular para automatizar el proceso es Jenkins, que se puede configurar mediante plugins como Kubernetes Jenkins Plugin o Jenkins Pipeline para trabajar con YAML files de Kubernetes (k8s).\n\nPara despliegue en Kubernetes, se utiliza un archivo de manifesto (manifest.yaml) que define la configuración del entorno y los recursos necesarios. Por ejemplo:\n```bash\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: my-app\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: my-app\n  template:\n    metadata:\n      labels:\n        app: my-app\n    spec:\n      containers:\n      - name: my-app\n        image: my-app:latest\n```\nEl despliegue se realiza mediante el comando kubectl apply en el archivo de manifesto:\n```bash\nkubectl apply -f manifest.yaml\n```\nEn un pipeline de Jenkins, se puede definir una etapa para desplegar la aplicación mediante un script que ejecuta el comando kubectl apply en el archivo de manifesto:\n```groovy\npipeline {\n    agent any\n\n    stages {\n        stage('Build') {\n            steps {\n                // Compilar y generar el archivo de manifesto\n            }\n        }\n        stage('Deploy') {\n            steps {\n                sh 'kubectl apply -f manifest.yaml'\n            }\n        }\n    }\n}\n```\nLas mejores prácticas incluyen utilizar una estructura de carpetas para organizar los archivos de manifesto, separados por ambiente (desarrollo, pruebas y producción), y realizar pruebas unitarias y integrales antes del despliegue en Kubernetes. También es importante mantener la seguridad al controlar el acceso a los recursos de Kubernetes mediante roles y permisos.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T16:40:55.353Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3qe6obkx9r",
+      "text": " P: ¿Qué es la automatización de despliegue de Kubernetes con CI/CD?\nR: La automatización de despliegue de Kubernetes con CI/CD implica la automatización del proceso de implementación de aplicaciones en un entorno Kubernetes mediante el uso de herramientas de CI/CD para lograr un flujo continuo de compilación, pruebas y despliegues.\n\nP: ¿Cómo se utiliza Jenkins para automatizar el proceso de despliegue en Kubernetes?\nR: Jenkins puede configurarse mediante plugins como Kubernetes Jenkins Plugin o Jenkins Pipeline para trabajar con YAML files de Kubernetes (k8s). En un pipeline de Jenkins, se pueden definir etapas para compilar y generar el archivo de manifesto, realizar pruebas unitarias y integrales, y desplegar la aplicación mediante el comando kubectl apply en el archivo de manifesto.\n\nP: ¿Qué son las mejores prácticas para despliegues en Kubernetes con Jenkins?\nR: Las mejores prácticas incluyen utilizar una estructura de carpetas para organizar los archivos de manifesto, separados por ambiente (desarrollo, pruebas y producción), realizar pruebas unitarias y integrales antes del despliegue en Kubernetes, mantener la seguridad al controlar el acceso a los recursos de Kubernetes mediante roles y permisos, y utilizar archivos de manifesto para definir la configuración del entorno y los recursos necesarios.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T16:41:03.563Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3qtdbj1wlr",
+      "text": " K3s es una distribución de Kubernetes ligera y fácil de usar, diseñada para dispositivos IoT (Internet of Things) y edge computing. Se basa en Rancher y se enfoca en la reducción del consumo de recursos y el aumento de la velocidad de arranque.\n\nPara instalar K3s, primero debes descargar la imagen de contenedor desde el repositorio oficial:\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\nEsto instala y inicia un clúster K3s en tu sistema operativo. Si deseas especificar opciones de configuración, puedes agregar parámetros al comando anterior:\n```bash\ncurl -sfL https://get.k3s.io | K3S_URL=https://your-server:6443 K3S_TOKEN=your-token sh -\n```\nEl token y la URL son necesarios para autenticar el acceso al clúster.\n\nPara verificar la instalación, puedes ejecutar:\n```bash\nsudo systemctl status k3s\n```\nPara administrar el clúster, puedes usar las herramientas de línea de comando `kubectl`, pero debes configurarlas con la URL y token del clúster:\n```bash\nsudo mktemp -d /tmp/k3s-admin.env && \\\n  K3S_URL=https://your-server:6443 K3S_TOKEN=your-token kubectl config set-cluster k3s --server https://$K3S_URL --certificate-authority /etc/rancher/k3s/ca.crt && \\\n  K3S_URL=https://your-server:6443 K3S_TOKEN=your-token kubectl config set-credentials k3s-admin --token=$K3S_TOKEN && \\\n  kubectl config set-context k3s --cluster=k3s --user=k3s-admin && \\\n  kubectl config use-context k3s && \\\n  rm -f /tmp/k3s-admin.env\n```\nLas mejores prácticas incluyen:\n\n* Limitar el acceso al clúster a través de firewalls y autenticación segura.\n* Monitorizar el uso de recursos del clúster para evitar sobrecargas.\n* Utilizar imágenes de contenedor optimizadas para reducir el consumo de recursos.\n* Actualizar regularmente K3s para mantener la seguridad y las características más recientes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T16:52:52.015Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3qthqkn428",
+      "text": " P1: ¿Cómo se instala K3s en un sistema operativo?\nR1: Para instalar K3s, primero debes descargar la imagen de contenedor desde el repositorio oficial mediante el siguiente comando: `curl -sfL https://get.k3s.io | sh -`. Si deseas especificar opciones de configuración, puedes agregar parámetros al comando anterior.\n\nP2: ¿Cómo se verifica la instalación de K3s?\nR2: Para verificar la instalación de K3s, puedes ejecutar el siguiente comando: `sudo systemctl status k3s`.\n\nP3: ¿Qué herramientas se pueden usar para administrar un clúster K3s?\nR3: Para administrar un clúster K3s, puedes usar las herramientas de línea de comando `kubectl`, pero debes configurarlas con la URL y token del clúster. La configuración se puede realizar mediante los siguientes comandos:\n```bash\nsudo mktemp -d /tmp/k3s-admin.env && \\\n  K3S_URL=https://your-server:6443 K3S_TOKEN=your-token kubectl config set-cluster k3s --server https://$K3S_URL --certificate-authority /etc/rancher/k3s/ca.crt && \\\n  K3S_URL=https://your-server:6443 K3S_TOKEN=your-token kubectl config set-credentials k3s-admin --token=$K3S_TOKEN && \\\n  kubectl config set-context k3s --cluster=k3s --user=k3s-admin && \\\n  kubectl config use-context k3s && \\\n  rm -f /tmp/k3s-admin.env\n```",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T16:52:57.740Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3qto03v5ub",
+      "text": " Automatización de despliegue de Kubernetes con CI/CD (Integración Continua / Implementación Continua) permite la automatización del proceso completo de desarrollo, pruebas y implementación de aplicaciones en contenedores en un ambiente Kubernetes.\n\nPara lograr esto se utilizan herramientas como Jenkins, Travis CI o CircleCI, entre otras. La configuración básica consiste en escribir scripts (ejemplos: Jenkinsfile, .travis.yml) que definen las etapas del proceso de CI/CD, incluyendo compilación, pruebas unitarias, pruebas funcionales y despliegue en Kubernetes.\n\nPara desplegar la aplicación en Kubernetes se utilizan comandos como `kubectl apply` y `kubectl delete`, que permiten crear o eliminar recursos de Kubernetes, respectivamente. Además, se pueden utilizar herramientas como Helm o Kustomize para facilitar el despliegue de aplicaciones en Kubernetes.\n\nPor ejemplo, un Jenkinsfile para desplegar una aplicación en Kubernetes podría tener la siguiente estructura:\n```\npipeline {\n    agent any\n    stages {\n        stage('Build') {\n            steps {\n                sh 'mvn clean package' // Compila y crea el artifact\n            }\n        }\n        stage('Test') {\n            steps {\n                sh 'mvn test' // Ejecuta pruebas unitarias\n            }\n        }\n        stage('Deploy') {\n            steps {\n                sh 'kubectl apply -f target/myapp.yaml' // Despliega la aplicación en Kubernetes\n            }\n        }\n    }\n}\n```\nEn cuanto a mejores prácticas, se recomienda utilizar un pipeline de CI/CD para cada proyecto y mantener el código del pipeline en version control. Además, es importante realizar pruebas unitarias y funcionales antes de desplegar la aplicación en Kubernetes, para garantizar su correcta operación.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T16:53:05.860Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3qtqnhoau4",
+      "text": " P1: ¿Qué es la automatización de despliegue de Kubernetes con CI/CD?\nR1: La automatización de despliegue de Kubernetes con CI/CD (Integración Continua / Implementación Continua) es un proceso completo que permite la automatización del desarrollo, pruebas y implementación de aplicaciones en contenedores en un ambiente Kubernetes.\n\nP2: ¿Cuáles son algunas herramientas utilizadas para la configuración básica de CI/CD en Kubernetes?\nR2: Algunas herramientas utilizadas para la configuración básica de CI/CD en Kubernetes incluyen Jenkins, Travis CI y CircleCI.\n\nP3: ¿Cómo se utiliza el comando `kubectl apply` en un pipeline de CI/CD?\nR3: El comando `kubectl apply` se utiliza en un pipeline de CI/CD para desplegar una aplicación en Kubernetes, creando recursos de Kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T16:53:09.293Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rrcwbbm66",
+      "text": " K3s es una versión ligera de Kubernetes optimizada para dispositivos edge y nubes pequeñas. Se implementa mediante la ejecución del binario en un sistema operativo compatible (como Linux) y se configura con un token de autenticación y el nombre del cluster.\n\nPara instalar K3s, ejecuta el siguiente comando:\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\nEste comando descarga e instala el binario de K3s en tu sistema y inicia el cluster con un nodo maestro y un nodo trabajador predeterminados.\n\nPara obtener la dirección IP del maestro, ejecuta:\n```bash\nsudo cat /var/lib/rancher/k3s/server/node-token\n```\nPara verificar que el cluster esté funcionando correctamente, ejecuta:\n```bash\nsudo kubectl get pods --all-namespaces\n```\nEn términos de mejores prácticas, es recomendable configurar K3s con un token personalizado y una red virtual privada (VPN) para proteger el acceso al cluster. También es importante mantener actualizados los componentes de K3s y aplicar políticas de seguridad adecuadas.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:19:17.771Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rreuaxcal",
+      "text": " P1: ¿Cómo se instala K3s en un sistema operativo Linux?\nR1: Se instala mediante el comando `curl -sfL https://get.k3s.io | sh -`.\n\nP2: ¿Cómo puedo obtener la dirección IP del maestro en mi cluster de K3s?\nR2: Para obtener la dirección IP del maestro, ejecuta el comando `sudo cat /var/lib/rancher/k3s/server/node-token`.\n\nP3: ¿Cómo puedo verificar que mi cluster de K3s está funcionando correctamente?\nR3: Para verificar que el cluster esté funcionando correctamente, ejecuta el comando `sudo kubectl get pods --all-namespaces`.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:19:20.290Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rroxwl1r4",
+      "text": " Automatización de implementación de Kubernetes con sistemas de integración continua e implementación continuas (CI/CD) permite la automatización del proceso completo de desarrollo, pruebas y despliegue de aplicaciones en entornos Kubernetes.\n\nPara lograr esto, se utilizan herramientas como Jenkins, Travis CI, CircleCI o GitLab CI/CD para la creación de pipelines que permiten la ejecución automática de tareas como compilación, pruebas unitarias y integrales, despliegue en entornos locales o remotos, escalado y actualización de aplicaciones.\n\nPara implementar un pipeline CI/CD con Kubernetes, se siguen los siguientes pasos:\n\n1. Creación del pipeline en la herramienta de CI/CD seleccionada (ejemplo: GitLab CI/CD).\n2. Definición de las tareas a ejecutar en cada etapa del pipeline, como compilación, pruebas y despliegue.\n3. Configuración de la integración con el repositorio de código fuente (ejemplo: GitHub).\n4. Definición de los entornos Kubernetes necesarios para el despliegue de las aplicaciones, incluyendo imágenes Docker y configuración de servicios.\n5. Configuración del despliegue automático en el pipeline CI/CD, utilizando herramientas como Helm o Kustomize.\n6. Ejecución del pipeline para verificar la correcta ejecución de las tareas y el despliegue de las aplicaciones en Kubernetes.\n\nAlgunos ejemplos prácticos de comandos y configuraciones:\n- Definición de un pipeline en GitLab CI/CD:\n```yaml\nstages:\n  - build\n  - test\n  - deploy\n\nbuild_job:\n  stage: build\n  script:\n    - docker build -t mi-app .\n\ntest_job:\n  stage: test\n  script:\n    - docker run -it mi-app /bin/sh -c \"make test\"\n\ndeploy_job:\n  stage: deploy\n  script:\n    - kubectl apply -f deployment.yaml\n```\n- Definición de un despliegue automático con Helm:\n```yaml\napiVersion: v2\nkind: Release\nmetadata:\n  name: mi-app\nspec:\n  chart: mi-app\n  repository: https://my-chart-repo.com/charts\n  version: 1.0.0\n  createNamespace: true\n``\nEn términos de mejores prácticas, es importante seguir las guías de Kubernetes y la documentación de la herramienta de CI/CD utilizada para garantizar la seguridad, escalabilidad y rendimiento del pipeline. Además, se recomienda utilizar herramientas como Argo CD o Flagger para la gestión continua de los despliegues en producción.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:19:33.380Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rrsj7nlv6",
+      "text": " P1: ¿Qué es el proceso de automatización de implementación de Kubernetes con CI/CD?\nR1: El proceso de automatización de implementación de Kubernetes con CI/CD es un método que permite la automatización del proceso completo de desarrollo, pruebas y despliegue de aplicaciones en entornos Kubernetes.\n\nP2: ¿Qué herramientas se utilizan para crear pipelines que permiten la ejecución automática de tareas como compilación, pruebas unitarias y integrales, despliegue en entornos locales o remotos, escalado y actualización de aplicaciones?\nR2: Las herramientas utilizadas para crear pipelines son Jenkins, Travis CI, CircleCI o GitLab CI/CD.\n\nP3: ¿Cómo se configura el despliegue automático en un pipeline CI/CD con Kubernetes?\nR3: El despliegue automático se configura utilizando herramientas como Helm o Kustomize.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:19:38.035Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rv275njeg",
+      "text": " Kubernetes (k8s) es una plataforma de código abierto para la orquestación de contenedores que permite administrar aplicaciones distribuidas en entornos multi-nodo. K3s es una versión ligera de Kubernetes, diseñada para dispositivos IoT y edge computing.\n\nPara instalar un cluster K3s, primero debes descargar el binario del servidor y el cliente:\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\nEsto instala el servidor en tu máquina local con la configuración predeterminada. Para instalarlo en un nodo remoto, especifica su IP:\n```bash\ncurl -sfL https://get.k3s.io | K3S_URL=https://<IP-REMOTO>:6443 K3S_TOKEN=<TOKEN> sh -\n```\nEl token se puede obtener desde la salida del comando de instalación local: `sudo cat /var/lib/rancher/k3s/server/node-token`.\n\nUna vez instalado, puedes verificar el estado del cluster con los siguientes comandos:\n```bash\nsudo k3s kubectl get nodes\nsudo k3s kubectl get pods --all-namespaces\n```\nPara crear un servicio y una aplicación, se utiliza el archivo YAML. Por ejemplo:\n```yaml\napiVersion: v1\nkind: Service\nmetadata:\n  name: nginx\nspec:\n  selector: app=nginx\n  ports:\n    - port: 80\n      targetPort: 80\n---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: nginx\n  template:\n    metadata:\n      labels:\n        app: nginx\n    spec:\n      containers:\n      - name: nginx\n        image: nginx:1.7.9\n        ports:\n        - containerPort: 80\n```\nSe puede aplicar este archivo con el comando:\n```bash\nsudo k3s kubectl apply -f nombre_archivo.yaml\n```\nLas mejores prácticas incluyen utilizar RBAC (Roles y Permisos en Basado en Rol) para proteger el acceso al cluster, mantener la actualización del sistema operativo y de K3s, y regularmente verificar el estado del cluster con los comandos anteriores.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:22:10.529Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rv67wo9d0",
+      "text": " P1: ¿Cómo se instala un cluster K3s en una máquina local?\nR1: Se instala un cluster K3s en una máquina local ejecutando el siguiente comando: `curl -sfL https://get.k3s.io | sh -`\n\nP2: ¿Cómo se instala un cluster K3s en un nodo remoto?\nR2: Para instalar un cluster K3s en un nodo remoto, se especifica su IP y token en el comando de instalación: `curl -sfL https://get.k3s.io | K3S_URL=https://<IP-REMOTO>:6443 K3S_TOKEN=<TOKEN> sh -`\n\nP3: ¿Cómo se crea un servicio y una aplicación en K3s?\nR3: Se crean un servicio y una aplicación en K3s mediante el uso de un archivo YAML. Por ejemplo, se puede aplicar este archivo con el comando: `sudo k3s kubectl apply -f nombre_archivo.yaml`",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:22:15.740Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rvhtpwh1p",
+      "text": " Automatización de implementación de Kubernetes con CI/CD (Integración Continua / Implementación Continua) se refiere a la utilización de herramientas de automatización para desplegar y actualizar aplicaciones en un entorno Kubernetes de manera continua y eficiente.\n\nPara implementar una cadena de trabajo CI/CD para Kubernetes, hay varias opciones populares como Jenkins, Travis CI o GitLab CI/CD. En este ejemplo, se utilizará GitLab CI/CD.\n\nLa configuración básica de una cadena de trabajo CI/CD en GitLab incluye un archivo .gitlab-ci.yml en el repositorio que define los pasos a seguir durante la integración y despliegue.\n\nA continuación, se muestra un ejemplo de configuración básica:\n```yaml\nstages:\n  - build\n  - test\n  - deploy\n\nvariables:\n  KUBECONFIG: ./kubeconfig.yml\n\nbefore_script:\n  - apt-get update && apt-get install -y apt-transport-https curl\n  - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -\n  - echo \"deb https://apt.kubernetes.io/ kubernetes-xenial main\" > /etc/apt/sources.list.d/kubernetes.list\n  - apt-get update && apt-get install -y kubectl\n\nbuild:\n  stage: build\n  script:\n    - go build -o app .\n  artifacts:\n    - app\n\ntest:\n  stage: test\n  script:\n    - ./app\n\ndeploy:\n  stage: deploy\n  script:\n    - kubectl apply -f app.yml\n  only:\n    - master\n```\nEn este ejemplo, se define una cadena de trabajo con tres etapas (build, test y deploy) y una variable KUBECONFIG que contiene la configuración de Kubernetes. El script antes del trabajo instala kubectl en el servidor de integración.\n\nLa etapa build compila un programa Go y guarda el archivo binario en artefactos para su uso posterior. La etapa test ejecuta el programa compilado. La etapa deploy despliega la aplicación en Kubernetes mediante kubectl, pero solo si se ha realizado una actualización en el repositorio maestro (master).\n\nLas mejores prácticas para automatizar la implementación de Kubernetes con CI/CD incluyen:\n- Utilizar un entorno de integración separado para la ejecución de los trabajos.\n- Implementar tests unitarios y funcionales para garantizar la calidad del código antes de desplegarlo en producción.\n- Utilizar Dockerfiles para crear imágenes de contenedor con las dependencias necesarias.\n- Monitorizar el estado de los trabajos y recibir notificaciones en caso de fallas o errores.\n- Seguir buenas prácticas de seguridad, como la rotación de claves y la protección de acceso a recursos sensibles.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:22:30.781Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rvlpcn0wp",
+      "text": " P1: ¿Qué es la automatización de implementación de Kubernetes con CI/CD?\nR1: La automatización de implementación de Kubernetes con CI/CD se refiere a la utilización de herramientas de automatización para desplegar y actualizar aplicaciones en un entorno Kubernetes de manera continua y eficiente.\n\nP2: ¿Qué es el archivo .gitlab-ci.yml en GitLab CI/CD?\nR2: El archivo .gitlab-ci.yml en GitLab CI/CD define los pasos a seguir durante la integración y despliegue de una aplicación en Kubernetes.\n\nP3: ¿Qué es el script antes del trabajo en el ejemplo de configuración básica de GitLab CI/CD?\nR3: El script antes del trabajo en el ejemplo de configuración básica de GitLab CI/CD instala kubectl en el servidor de integración.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:22:35.808Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rwiqmtf9s",
+      "text": " K3s es una versión ligeramente modificada de Kubernetes optimizada para dispositivos IoT y Edge computing. Se enfoca en reducir el consumo de recursos y simplificar la administración.\n\nPara instalar un clúster K3s, primero necesitas descargar la imagen de contenedor desde https://rancher.com/docs/k3s/latest/en/installation/. Luego, ejecuta el siguiente comando en cada nodo del clúster:\n\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\n\nEl servidor maestro será elegido automáticamente entre los nodos. Para verificar la instalación, accede a http://<IP_MASTER>:6443 para verificar el dashboard y consulta el estado del clúster con:\n\n```bash\nsudo kubectl get nodes\n```\n\nPara configurar un nodo como maestro o trabajador, usa los parámetros `--server --worker`. Para actualizar K3s, ejecuta el siguiente comando en el nodo maestro:\n\n```bash\nsudo k3sup upgrade -u\n```\n\nAlgunas mejores prácticas incluyen:\n- Configurar seguridad con certificados TLS.\n- Usar registros de contenedores para depuración y monitoreo.\n- Configurar autoscaling en los nodos trabajadores.\n- Utilizar plugins como Fluentd para gestionar logs.\n- Usar Helm para desplegar aplicaciones en Kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:23:18.622Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rwm1fq1e1",
+      "text": " P: ¿Cómo se descarga la imagen de contenedor de K3s?\nR: La imagen de contenedor de K3s se descarga desde https://rancher.com/docs/k3s/latest/en/installation/.\n\nP: ¿Cómo se ejecuta el comando para instalar un clúster K3s en cada nodo del clúster?\nR: El comando para instalar un clúster K3s en cada nodo del clúster es `curl -sfL https://get.k3s.io | sh -`.\n\nP: ¿Cómo se configura un nodo como maestro o trabajador en un clúster K3s?\nR: Para configurar un nodo como maestro o trabajador, se usan los parámetros `--server` para el maestro y `--worker` para los trabajadores.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:23:22.899Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rwx9ydyoa",
+      "text": " Automatización de despliegue de Kubernetes con pipeline de integración/entrega continua (CI/CD) se refiere a la utilización de herramientas de automatización para implementar y mantener el ciclo de vida de las aplicaciones en un ambiente Kubernetes.\n\nPara lograr esto, se utilizan pasos definidos en un pipeline que incluyen compilación, pruebas, despliegue y escalado de la aplicación en Kubernetes. Algunas herramientas populares para implementar pipelines CI/CD son Jenkins, CircleCI, TravisCI y GitLab CI.\n\nPara implementar un pipeline CI/CD con Kubernetes, se necesita una configuración del pipeline que incluya los pasos mencionados anteriormente y la integración de herramientas como Helm o Kustomize para desplegar aplicaciones en Kubernetes.\n\nUn ejemplo práctico de un pipeline CI/CD con Jenkins y Helm podría ser el siguiente:\n\n1. Se define una pipeline en Jenkins que incluye los pasos de compilación, pruebas y despliegue.\n2. Se utiliza la herramienta Helm para crear un archivo YAML (manifests) que describe la aplicación y sus recursos en Kubernetes.\n3. El pipeline se configura para ejecutar el comando `helm install` con el archivo YAML creado anteriormente, lo que despliega la aplicación en un clúster de Kubernetes.\n4. Se utiliza el comando `kubectl get pods` para verificar que la aplicación se haya desplegado correctamente.\n5. Para realizar actualizaciones en la aplicación, se puede utilizar el comando `helm upgrade` para actualizar el archivo YAML y volver a desplegar la aplicación con las nuevas características.\n\nAlgunas mejores prácticas para automatización de despliegue de Kubernetes con CI/CD incluyen:\n\n1. Utilizar version control (por ejemplo, Git) para almacenar los archivos YAML y el código fuente de la aplicación.\n2. Implementar pruebas unitarias y integrales para garantizar la calidad de la aplicación antes de desplegarla en Kubernetes.\n3. Utilizar imágenes Docker con etiquetas específicas para facilitar el despliegue y escalado de las aplicaciones.\n4. Implementar monitoreo y alertas para garantizar la disponibilidad y rendimiento de la aplicación en Kubernetes.\n5. Utilizar herramientas como ArgoCD o Flagger para realizar actualizaciones en producción con menos impacto en el usuario final.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:23:37.462Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rx1ggcbd7",
+      "text": " P1: ¿Qué es la automatización de despliegue de Kubernetes con pipeline CI/CD?\nR1: La automatización de despliegue de Kubernetes con pipeline CI/CD se refiere a la utilización de herramientas de automatización para implementar y mantener el ciclo de vida de las aplicaciones en un ambiente Kubernetes, mediante pasos definidos en un pipeline que incluyen compilación, pruebas, despliegue y escalado de la aplicación.\n\nP2: ¿Qué herramientas se utilizan para implementar pipelines CI/CD con Kubernetes?\nR2: Algunas herramientas populares para implementar pipelines CI/CD son Jenkins, CircleCI, TravisCI y GitLab CI.\n\nP3: ¿Cómo se despliega una aplicación en un clúster de Kubernetes utilizando Helm?\nR3: Para desplegar una aplicación en un clúster de Kubernetes utilizando Helm, se utiliza el comando `helm install` con un archivo YAML que describe la aplicación y sus recursos en Kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:23:42.880Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rxni236jl",
+      "text": " K3s es una versión ligera de Kubernetes diseñada para dispositivos edge y IoT (Internet de las Cosas). Su objetivo es proporcionar la funcionalidad de Kubernetes en entornos de bajo consumo de recursos con un menor impacto en la infraestructura.\n\nLa implementación de un cluster K3s se realiza mediante el uso de una imagen Docker de Rancher y se puede hacer localmente o en un entorno de nube como AWS, Google Cloud o Azure. Para instalarlo en un servidor, ejecuta el siguiente comando:\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\nEste comando descarga e instala K3s en tu sistema.\n\nPara verificar la instalación, accede a la página `http://<ip-del-servidor>:6443` y verifica que el servicio esté funcionando correctamente.\n\nLa gestión de un cluster K3s se puede realizar mediante la herramienta `kubectl`, pero también hay una interfaz web disponible en `http://<ip-del-servidor>:6441`.\n\nAlgunos comandos clave son:\n\n* Para listar los pods: `kubectl get pods`\n* Para crear un nuevo despliegue: `kubectl apply -f <archivo-del-despliegue>.yaml`\n* Para eliminar un despliegue: `kubectl delete -f <archivo-del-despliegue>.yaml`\n\nLas mejores prácticas incluyen la segmentación de espacios de nombres, el uso de redes virtuales privadas y la configuración de seguridad adecuada. También es importante tener en cuenta la escalabilidad del cluster al momento de crear los despliegues para garantizar que sean eficientes en términos de recursos.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:24:11.450Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rxs1rn98d",
+      "text": " P1: ¿Cómo se instala K3s en un servidor?\nR1: Se instala K3s en un servidor ejecutando el siguiente comando: `curl -sfL https://get.k3s.io | sh -`\n\nP2: ¿Cómo se verifica la instalación de K3s?\nR2: Para verificar la instalación, accede a la página `http://<ip-del-servidor>:6443` y verifica que el servicio esté funcionando correctamente.\n\nP3: ¿Cómo se puede gestionar un cluster K3s?\nR3: La gestión de un cluster K3s se puede realizar mediante la herramienta `kubectl`, pero también hay una interfaz web disponible en `http://<ip-del-servidor>:6441`. Algunos comandos clave son:\n   - Para listar los pods: `kubectl get pods`\n   - Para crear un nuevo despliegue: `kubectl apply -f <archivo-del-despliegue>.yaml`\n   - Para eliminar un despliegue: `kubectl delete -f <archivo-del-despliegue>.yaml`",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:24:17.343Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3ry18kqqyy",
+      "text": " Automatización del despliegue de Kubernetes con pipelines CI/CD (Continuous Integration/Continuous Deployment) permite automatizar el proceso de implementación y actualización de aplicaciones en un entorno Kubernetes.\n\nPara lograr esto, se utilizan herramientas de integración continua como Jenkins, CircleCI o GitLab CI, que trabajan en conjunto con plugins específicos para Kubernetes como kubectl y Helm.\n\n1. kubectl: Es una línea de comandos utilizada para interactuar con un clúster Kubernetes local o remoto. Puede crear, actualizar y eliminar recursos en el clúster, como pods, servicios y configmaps. Ejemplo: `kubectl apply -f mi-deployment.yaml`\n\n2. Helm: Es una herramienta de empaqueteo para Kubernetes que simplifica la gestión de aplicaciones en el clúster. Permite crear y desplegar paquetes de aplicaciones compuestos, incluyendo sus recursos y configuraciones. Ejemplo: `helm install mi-app mi-app-chart`\n\n3. Jenkins: Es una herramienta de CI/CD popular que permite automatizar el proceso de integración continua para aplicaciones. Puede trabajar con plugins específicos como Kubernetes plugin y Helm plugin para desplegar aplicaciones en un clúster Kubernetes. Ejemplo: Configurar un pipeline en Jenkins que incluya pasos para compilar el código, crear un paquete Helm y desplegarlo en el clúster Kubernetes.\n\n4. Mejoras prácticas:\n   - Utilizar imágenes Docker para asegurar la consistencia de la aplicación entre diferentes entornos.\n   - Seguir las mejores prácticas de seguridad en el clúster Kubernetes, como limitar los privilegios y utilizar certificados TLS.\n   - Utilizar tests unitarios y integración para garantizar la calidad del código antes de desplegarlo en producción.\n   - Utilizar canales de Helm para controlar la versión de las aplicaciones que se despliegan en el clúster Kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:24:29.252Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3ry6j96o9d",
+      "text": " 1. P: ¿Qué es kubectl y qué funciones cumple en un entorno de Kubernetes?\n   R: kubectl es una línea de comandos utilizada para interactuar con un clúster Kubernetes local o remoto. Puede crear, actualizar y eliminar recursos en el clúster, como pods, servicios y configmaps.\n\n2. P: ¿Qué es Helm y cómo simplifica la gestión de aplicaciones en un clúster Kubernetes?\n   R: Helm es una herramienta de empaqueteo para Kubernetes que permite crear y desplegar paquetes de aplicaciones compuestos, incluyendo sus recursos y configuraciones. Esto simplifica la gestión de aplicaciones en un clúster Kubernetes al permitir desplegar aplicaciones en forma modular y reutilizable.\n\n3. P: ¿Qué es Jenkins y cómo se utiliza para automatizar el proceso de integración continua para aplicaciones en un clúster Kubernetes?\n   R: Jenkins es una herramienta de CI/CD popular que permite automatizar el proceso de integración continua para aplicaciones. Puede trabajar con plugins específicos como Kubernetes plugin y Helm plugin para desplegar aplicaciones en un clúster Kubernetes. Esto incluye pasos como compilar el código, crear un paquete Helm y desplegarlo en el clúster Kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:24:36.117Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3ryvtynn2q",
+      "text": " K3s es una versión ligera de Kubernetes optimizada para dispositivos IoT y edge computing. Se basa en Rancher y proporciona una solución fácil de implementar y administrar clusters de Kubernetes.\n\nPara instalar K3s, se necesitan dos comandos principales: `curl -sfL https://get.k3s.io | sh` para descargar e instalar el binario de K3s en tu sistema y `sudo k3s kubectl get nodes` para verificar la instalación.\n\nPara configurar un cluster, se utiliza el comando `k3s kubeconfig print > /etc/rancher/k3s/k3s.yaml`, que crea un archivo de configuración Kubernetes personalizado. Luego, se puede agregar nodos al cluster con `curl -sfL https://get.k3s.io | K3S_URL=https://<master-ip>:6443 K3S_TOKEN=<token> sh -`.\n\nAlgunas mejores prácticas incluyen:\n\n1. Configurar el acceso seguro a través de TLS y RBAC (Roles y Permisos Basados en Rol).\n2. Utilizar registros de auditoría para seguimiento y detección de anomalías.\n3. Monitorizar regularmente el estado del cluster con herramientas como Prometheus y Grafana.\n4. Utilizar Helm para simplificar la gestión de aplicaciones en Kubernetes.\n5. Configurar autoscaling para ajustar el número de nodos en función de la carga.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:25:08.902Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3ryzk66j1h",
+      "text": " P: ¿Cómo se instala K3s en un sistema?\nR: Se instala K3s mediante dos comandos principales: `curl -sfL https://get.k3s.io | sh` para descargar e instalar el binario de K3s y `sudo k3s kubectl get nodes` para verificar la instalación.\n\nP: ¿Cómo se configura un cluster en K3s?\nR: Se configura un cluster en K3s mediante el comando `k3s kubeconfig print > /etc/rancher/k3s/k3s.yaml`, que crea un archivo de configuración personalizado, y se pueden agregar nodos al cluster con `curl -sfL https://get.k3s.io | K3S_URL=https://<master-ip>:6443 K3S_TOKEN=<token> sh -`.\n\nP: ¿Qué herramientas se recomiendan para monitorizar el estado del cluster en K3s?\nR: Se recomiendan utilizar herramientas como Prometheus y Grafana para monitorizar regularmente el estado del cluster en K3s.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:25:13.734Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rz9p4cpu2",
+      "text": " Automatización de implementación de Kubernetes con pipelines CI/CD (Continuous Integration/Continuous Deployment) permite automatizar el proceso de entrega de aplicaciones en ambientes Kubernetes.\n\n1. **Qué es**: Los pipelines CI/CD son secuencias de pasos que se ejecutan automáticamente para compilar, probar y desplegar código en un entorno producción. En el contexto de Kubernetes, los pipelines CI/CD se utilizan para implementar aplicaciones Docker en clústeres Kubernetes.\n\n2. **Implementación**: Para automatizar la implementación de Kubernetes con pipelines CI/CD, es necesario utilizar herramientas como Jenkins, CircleCI o GitLab CI/CD. Estas herramientas se integran con repositorios de código fuente (como GitHub o Bitbucket) y se configuran para ejecutar los pasos del pipeline al detectar cambios en el código.\n\n3. **Comandos/ejemplos clave**: Para desplegar una aplicación Docker en Kubernetes, es necesario utilizar kubectl (una herramienta de línea de comando para interactuar con clústeres Kubernetes). Algunos comandos importantes incluyen:\n   - `kubectl apply -f <archivo-YAML>`: Despliega un recurso definido en un archivo YAML.\n   - `kubectl delete -f <archivo-YAML>`: Elimina un recurso definido en un archivo YAML.\n   - `kubectl get pods`: Muestra los pods en ejecución en el clúster.\n\n4. **Configuraciones**: En las herramientas de CI/CD, se configura un pipeline que incluye pasos para compilar el código, crear una imagen Docker, desplegar la aplicación en Kubernetes y realizar pruebas unitarias o integrales. La configuración se realiza mediante archivos YAML o JSON.\n\n5. **Mejores prácticas**: Algunas mejores prácticas para automatizar la implementación de Kubernetes con pipelines CI/CD incluyen:\n   - Utilizar imágenes Docker basadas en líneas base seguras y actualizadas.\n   - Aplicar políticas de seguridad en los clústeres Kubernetes, como control de acceso restrictivo y protección contra ataques DDoS.\n   - Realizar pruebas unitarias o integrales automáticas antes de desplegar la aplicación en producción.\n   - Utilizar canales de entrega multiples (como canales de desarrollo, prueba y producción) para garantizar que el código se despliega correctamente en cada etapa del pipeline.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:25:26.872Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3rzen7vjww",
+      "text": " 1. **Pregunta**: ¿Qué es un pipeline CI/CD y para qué sirve en el contexto de Kubernetes?\n   Respuesta: Un pipeline CI/CD es una secuencia de pasos que se ejecutan automáticamente para compilar, probar y desplegar código en un entorno producción. En el contexto de Kubernetes, los pipelines CI/CD se utilizan para implementar aplicaciones Docker en clústeres Kubernetes.\n\n2. **Pregunta**: ¿Qué herramientas se pueden utilizar para automatizar la implementación de Kubernetes con pipelines CI/CD?\n   Respuesta: Para automatizar la implementación de Kubernetes con pipelines CI/CD, es necesario utilizar herramientas como Jenkins, CircleCI o GitLab CI/CD. Estas herramientas se integran con repositorios de código fuente (como GitHub o Bitbucket) y se configuran para ejecutar los pasos del pipeline al detectar cambios en el código.\n\n3. **Pregunta**: ¿Cuál es el comando `kubectl apply -f <archivo-YAML>` y para qué sirve?\n   Respuesta: El comando `kubectl apply -f <archivo-YAML>` despliega un recurso definido en un archivo YAML en un clúster Kubernetes. Este comando es importante para automatizar la implementación de aplicaciones Docker en Kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:25:33.283Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s0h8rjteg",
+      "text": " Kubernetes (k8s) es una plataforma de contenedores abierta para automatizar el despliegue, escalado, operación y orquestación de aplicaciones en clústeres. K3s es una versión ligera de Kubernetes diseñada para dispositivos IoT (Internet of Things) y Edge computing.\n\nPara establecer un clúster k3s, primero necesitas instalar Raspberry Pi OS o algún otro sistema operativo compatible en tu dispositivo. Después, debes descargar e instalar el binario de K3s desde la página oficial (https://rancher.com/docs/k3s/latest/en/installation/).\n\nUna vez instalado, inicias el clúster con el siguiente comando:\n```bash\nsudo k3s kubectl init --node\n```\nEl servicio de API se configura automáticamente en el puerto 6443. Para verificar la instalación, ejecuta:\n```bash\nkubectl get nodes\n```\nPara añadir más nodos al clúster, debes copiar y pegar el token de autenticación del maestro en cada nodo que deseas agregar.\n```bash\nsudo cat /var/lib/rancher/k3s/server/node-token\n```\nPara desplegar una aplicación, crea un archivo YAML con la definición de tu aplicación y ejecuta:\n```bash\nkubectl apply -f mi-app.yaml\n```\nAlgunas mejores prácticas incluyen utilizar registros de contenedores, como Docker Hub o Google Container Registry, para almacenar las imágenes de tus aplicaciones; configurar el acceso al clúster mediante certificados TLS y limitar los privilegios de los usuarios kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:26:23.307Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s0ll69o2w",
+      "text": " P1: ¿Qué es Kubernetes (k8s) y para qué sirve?\nR1: Kubernetes (k8s) es una plataforma de contenedores abierta que se utiliza para automatizar el despliegue, escalado, operación y orquestación de aplicaciones en clústeres. Sirve para simplificar la gestión de aplicaciones distribuidas en entornos de contenedores.\n\nP2: ¿Qué es K3s y en qué se diferencia de Kubernetes?\nR2: K3s es una versión ligera de Kubernetes diseñada para dispositivos IoT (Internet of Things) y Edge computing. Se diferencia de Kubernetes principalmente por su tamaño reducido, lo que hace que sea más adecuado para dispositivos con limitaciones de recursos.\n\nP3: ¿Cómo se inicia un clúster k3s en un dispositivo Raspberry Pi?\nR3: Para establecer un clúster k3s en un dispositivo Raspberry Pi, primero necesitas instalar Raspberry Pi OS o algún otro sistema operativo compatible en tu dispositivo. Después, debes descargar e instalar el binario de K3s desde la página oficial (https://rancher.com/docs/k3s/latest/en/installation/) y ejecutar el comando `sudo k3s kubectl init --node` para iniciar el clúster.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:26:28.938Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s1awroomf",
+      "text": " K3s es una versión ligera de Kubernetes optimizada para dispositivos pequeños y edge computing. Se implementa mediante la ejecución del contenedor de K3s en los nodos de la red, lo que permite crear un clúster Kubernetes.\n\nPara instalar K3s, descarga el archivo .tar desde https://rancher.com/docs/k3s/latest/en/installation/, luego ejecuta el siguiente comando:\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\nEste comando descarga e instala K3s en tu sistema operativo. Por defecto, se creará un clúster de un solo nodo.\n\nPara agregar más nodos al clúster, ejecuta el siguiente comando en cada nodo:\n```bash\ncurl -sfL https://get.k3s.io | K3S_URL=https://<server-ip>:6443 K3S_TOKEN=<token> sh -\n```\nEn este comando, `<server-ip>` es la IP del nodo maestro y `<token>` es el token generado durante la instalación del primer nodo.\n\nPara verificar la instalación correcta de K3s, ejecuta:\n```bash\nsudo kubectl get nodes\n```\nEste comando listará los nodos del clúster y su estado.\n\nUna buena práctica es configurar el acceso a Internet en los nodos para que puedan actualizarse automáticamente con las versiones más recientes de Kubernetes. También, se recomienda habilitar la autenticación LDAP o OIDC para mejor seguridad.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:27:01.755Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s1fg06itk",
+      "text": " P1: ¿Qué es K3s?\nR1: K3s es una versión ligera de Kubernetes optimizada para dispositivos pequeños y edge computing, que se implementa mediante la ejecución del contenedor de K3s en los nodos de la red.\n\nP2: ¿Cómo se instala K3s en un sistema operativo?\nR2: Para instalar K3s, descarga el archivo .tar desde https://rancher.com/docs/k3s/latest/en/installation/, luego ejecuta el siguiente comando: `curl -sfL https://get.k3s.io | sh -`.\n\nP3: ¿Cómo se agrega un nodo más al clúster de K3s?\nR3: Para agregar más nodos al clúster, ejecuta el siguiente comando en cada nodo: `curl -sfL https://get.k3s.io | K3S_URL=https://<server-ip>:6443 K3S_TOKEN=<token> sh -`. En este comando, `<server-ip>` es la IP del nodo maestro y `<token>` es el token generado durante la instalación del primer nodo.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:27:07.632Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s1s408i4x",
+      "text": " Automatización de despliegue de Kubernetes con CI/CD (Continuous Integration/Continuous Deployment) es un proceso que permite automatizar el trabajo de integración y despliegue continuo de aplicaciones en entornos Kubernetes. Este proceso mejora la eficiencia, calidad y velocidad del desarrollo y despliegue de software.\n\nLa implementación de CI/CD con Kubernetes se puede realizar mediante herramientas como Jenkins, CircleCI, Travis CI o GitLab CI/CD. Estas herramientas permiten automatizar pasos tales como compilación, pruebas unitarias y integrales, despliegue en entornos de desarrollo, prueba y producción.\n\nPara implementar un pipeline de CI/CD con Kubernetes, se necesitan los siguientes pasos:\n\n1. Crear un repositorio de código fuente (por ejemplo, en GitHub).\n2. Configurar la herramienta de CI/CD seleccionada para trabajar con el repositorio de código fuente.\n3. Definir los pasos del pipeline de CI/CD en archivos de configuración (por ejemplo, Jenkinsfile o .gitlab-ci.yml).\n4. Configurar un entorno de desarrollo local para ejecutar las pruebas unitarias y integrales.\n5. Definir los recursos Kubernetes necesarios en archivos YAML (por ejemplo, deployment.yaml o service.yaml).\n6. Desplegar el pipeline en un servidor de CI/CD (por ejemplo, GitLab Runner o Jenkins Master) y configurarlo para ejecutar los pasos del pipeline en Kubernetes.\n7. Configurar un entorno de prueba y producción en Kubernetes.\n8. Desplegar la aplicación en el entorno de prueba y realizar pruebas integrales.\n9. Si las pruebas son exitosas, desplegar la aplicación en el entorno de producción.\n\nEjemplo práctico:\n\nSupongamos que estamos usando GitLab CI/CD para automatizar el despliegue de una aplicación en Kubernetes. El archivo .gitlab-ci.yml podría tener el siguiente contenido:\n```yaml\nimage: openjdk:8\n\nstages:\n  - build\n  - test\n  - deploy\n\nbuild_job:\n  stage: build\n  script:\n    - mvn clean package\n\ntest_job:\n  stage: test\n  script:\n    - mvn test\n\ndeploy_job:\n  stage: deploy\n  dependencies:\n    - build_job\n    - test_job\n  script:\n    - kubectl apply -f deployment.yaml\n```\nEn este ejemplo, el pipeline consta de tres jobs: build, test y deploy. El job build compila la aplicación usando Maven, el job test ejecuta las pruebas unitarias y integrales, y el job deploy despliega la aplicación en Kubernetes mediante kubectl.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:27:24.048Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s1z30lg47",
+      "text": " P1: ¿Qué es la automatización de despliegue de Kubernetes con CI/CD?\nR1: La automatización de despliegue de Kubernetes con CI/CD es un proceso que permite automatizar el trabajo de integración y despliegue continuo de aplicaciones en entornos Kubernetes, mejorando la eficiencia, calidad y velocidad del desarrollo y despliegue de software.\n\nP2: ¿Cuáles son algunas herramientas que se pueden utilizar para implementar un pipeline de CI/CD con Kubernetes?\nR2: Algunas herramientas que se pueden utilizar para implementar un pipeline de CI/CD con Kubernetes incluyen Jenkins, CircleCI, Travis CI o GitLab CI/CD.\n\nP3: ¿Qué pasos se necesitan para implementar un pipeline de CI/CD con Kubernetes?\nR3: Para implementar un pipeline de CI/CD con Kubernetes, se necesitan los siguientes pasos: crear un repositorio de código fuente, configurar la herramienta de CI/CD seleccionada para trabajar con el repositorio de código fuente, definir los pasos del pipeline de CI/CD en archivos de configuración, configurar un entorno de desarrollo local para ejecutar las pruebas unitarias y integrales, definir los recursos Kubernetes necesarios en archivos YAML, desplegar el pipeline en un servidor de CI/CD y configurarlo para ejecutar los pasos del pipeline en Kubernetes, configurar un entorno de prueba y producción en Kubernetes, desplegar la aplicación en el entorno de prueba y realizar pruebas integrales, y si las pruebas son exitosas, desplegar la aplicación en el entorno de producción.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:27:33.084Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s5z7akjnq",
+      "text": " K3s es una versión ligera de Kubernetes optimizada para dispositivos IoT (Internet of Things) y edge computing. Se basa en la implementación oficial de Rancher Labs y se ejecuta en un solo contenedor, lo que hace que sea más fácil de administrar en entornos con recursos limitados.\n\nEl setup de un cluster K3s se realiza mediante la descarga del binario del servidor y el agente desde la página oficial (https://rancher.com/docs/k3s/latest/en/installation/) y su ejecución en los nodos deseados. Por ejemplo:\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\nEl comando anterior instala el servidor y el agente en el mismo nodo, pero si se necesita un cluster multi-nodos, es preciso ejecutar el comando en cada uno de ellos con la opción `--server`.\n\nUna vez instalado, el acceso al API de Kubernetes se puede obtener mediante:\n```bash\nsudo k3s kubectl get pods --all-namespaces\n```\nPara crear un servicio y una aplicación, se utilizan los comandos `kubectl create deployment` y `kubectl expose deployment`. Por ejemplo:\n```bash\nkubectl create deployment nginx --image=nginx\nkubectl expose deployment nginx --port 80 --type LoadBalancer\n``\nLa configuración de un cluster K3s se puede realizar mediante archivos YAML y la opción `--config` en el comando de instalación. Por ejemplo, para especificar una IP estática para el servidor:\n```bash\ncurl -sfL https://get.k3s.io | K3S_URL=https://<IP>:6443 sh -\n```\nEn cuanto a mejores prácticas, se recomienda utilizar certificados TLS para la comunicación entre los nodos y con el API de Kubernetes, regularmente actualizar el cluster y realizar backups del mismo.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:30:39.862Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s61uk9yo1",
+      "text": " P1: ¿Cómo se instala un cluster K3s en un solo nodo?\nR1: El comando `curl -sfL https://get.k3s.io | sh -` se utiliza para instalar el servidor y el agente de K3s en un solo nodo.\n\nP2: ¿Cómo se accede al API de Kubernetes una vez que se ha instalado K3s?\nR2: El comando `sudo k3s kubectl get pods --all-namespaces` se utiliza para obtener acceso al API de Kubernetes.\n\nP3: ¿Cómo se crea un servicio y una aplicación en un cluster K3s?\nR3: Los comandos `kubectl create deployment` y `kubectl expose deployment` se utilizan para crear un servicio y una aplicación en un cluster K3s. Por ejemplo, `kubectl create deployment nginx --image=nginx` y `kubectl expose deployment nginx --port 80 --type LoadBalancer`.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:30:43.292Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s6a26k81w",
+      "text": " Automatización de despliegue de Kubernetes con pipelines CI/CD (Continuous Integration/Continuous Deployment) consiste en integrar herramientas de automatización en el ciclo de vida del software para garantizar la calidad, la velocidad y la seguridad del despliegue.\n\nPara implementar una pipeline CI/CD en Kubernetes, se utilizan diferentes herramientas como Jenkins, CircleCI, GitLab CI o Travis CI. Una de las más populares es Jenkins con el plugin Kubernetes.\n\n1. Instalación de Jenkins:\n   - Descargar e instalar Jenkins en un servidor (<https://www.jenkins.io/download/>)\n   - Configurar el acceso a la interfaz web y crear un usuario administrador\n\n2. Instalación del plugin Kubernetes:\n   - Acceder al Jenkins, ir a \"Manage Jenkins\" -> \"Manage Plugins\" -> \"Available\" y buscar \"Kubernetes\"\n   - Instalar el plugin y reiniciar Jenkins\n\n3. Configuración de la pipeline CI/CD:\n   - Crear un nuevo proyecto en Jenkins\n   - En la configuración del proyecto, seleccionar \"Pipeline script from SCM\" y elegir Git como control de versiones\n   - Configurar los parámetros de acceso a GitHub o cualquier otro repositorio de código fuente\n\n4. Creación del archivo Jenkinsfile:\n   - En el repositorio de código fuente, crear un archivo llamado Jenkinsfile con el script de la pipeline\n   - El script define las tareas a ejecutar en cada etapa del ciclo de vida (build, test, deploy) y los comandos para desplegar en Kubernetes\n\n5. Ejemplo de Jenkinsfile:\n\n```groovy\npipeline {\n    agent any\n    stages {\n        stage('Build') {\n            steps {\n                sh 'make'\n            }\n        }\n        stage('Test') {\n            steps {\n                sh 'make test'\n            }\n        }\n        stage('Deploy') {\n            steps {\n                kubectl apply -f app.yaml\n            }\n        }\n    }\n}\n```\n\n6. Mejores prácticas:\n   - Utilizar un repositorio de código fuente para almacenar el Jenkinsfile y facilitar la integración con GitHub o cualquier otro control de versiones\n   - Seguir las mejores prácticas de seguridad en Kubernetes como la autorización de acceso a los recursos, la protección de claves y el uso de TLS\n   - Testear regularmente la pipeline para garantizar su funcionalidad y identificar errores o fallas temprano en el ciclo de vida del software.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:30:53.934Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s6d53204i",
+      "text": " 1. P: ¿Cómo se instala Jenkins en un servidor?\n   R: Descargar e instalar Jenkins desde la página oficial de Jenkins (<https://www.jenkins.io/download/>) y configurar el acceso a la interfaz web y crear un usuario administrador.\n\n2. P: ¿Cómo se instala el plugin Kubernetes en Jenkins?\n   R: Acceder al Jenkins, ir a \"Manage Jenkins\" -> \"Manage Plugins\" -> \"Available\" y buscar \"Kubernetes\". Instalar el plugin y reiniciar Jenkins.\n\n3. P: ¿Cómo se configura una pipeline CI/CD en Jenkins?\n   R: Crear un nuevo proyecto en Jenkins, seleccionar \"Pipeline script from SCM\" y elegir Git como control de versiones, configurar los parámetros de acceso a GitHub o cualquier otro repositorio de código fuente, y crear un archivo llamado Jenkinsfile con el script de la pipeline que define las tareas a ejecutar en cada etapa del ciclo de vida (build, test, deploy) y los comandos para desplegar en Kubernetes.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:30:57.927Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s8r95njag",
+      "text": " K3s es una versión ligera de Kubernetes diseñada para dispositivos pequeños y Edge Computing. Permite implementar y administrar fácilmente clusters Kubernetes en entornos con restricciones de recursos.\n\nPara instalar K3s, primero debes descargar el binario desde la página oficial: https://rancher.com/docs/k3s/latest/en/installation/. Después, ejecuta el siguiente comando para instalarlo en tu servidor:\n\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\n\nEl comando anterior instala K3s como un servicio systemd y inicia automáticamente el cluster master-node. Para verificar la instalación, ejecuta:\n\n```bash\nsudo k3s kubectl get nodes\n```\n\nPara agregar más nodos al cluster, debes obtener el token de autenticación del master y aplicarlo en los nodos adicionales. Puedes encontrar el token ejecutando:\n\n```bash\nsudo cat /var/lib/rancher/k3s/server/node-token\n```\n\nPara agregar un nuevo nodo, ejecuta el siguiente comando en él:\n\n```bash\ncurl -sfL https://get.k3s.io | K3S_URL=http://<MASTER_IP>:6443 K3S_TOKEN=<TOKEN> sh -\n```\n\nPara administrar el cluster, puedes usar kubectl (si tienes instalado) o la interfaz de línea de comandos proporcionada por Rancher. Para más información sobre K3s y su uso, visita la documentación oficial: https://rancher.com/docs/k3s/latest/.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:32:49.529Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s8t8yfyzz",
+      "text": " P1: ¿Cómo se descarga el binario de K3s para su instalación?\nR1: Para descargar el binario de K3s, accede a la página oficial en https://rancher.com/docs/k3s/latest/en/installation/.\n\nP2: ¿Cómo se instala K3s en un servidor?\nR2: Para instalar K3s en un servidor, ejecuta el siguiente comando: `curl -sfL https://get.k3s.io | sh -`.\n\nP3: ¿Cómo se puede verificar la instalación de K3s?\nR3: Para verificar la instalación de K3s, ejecuta el comando `sudo k3s kubectl get nodes`.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:32:52.114Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s923t6vai",
+      "text": " Automatización de despliegue de Kubernetes con pipelines CI/CD (Continuous Integration/Continuous Deployment) consiste en integrar la infraestructura de Kubernetes en el ciclo de vida del software para automatizar el despliegue, escalado y actualización de aplicaciones.\n\nPara lograr esto se utilizan herramientas como Jenkins, Travis CI o GitLab CI/CD. Por ejemplo, con Jenkins se puede crear un pipeline que realice las siguientes tareas:\n\n1. Clonado del repositorio de código fuente.\n2. Compilación y pruebas unitarias en el entorno local.\n3. Creación de una imagen Docker con la aplicación compilada.\n4. Despliegue de la imagen Docker en un cluster Kubernetes mediante kubectl o Helm.\n5. Pruebas integrales en un ambiente de staging.\n6. Despliegue final en el entorno de producción.\n\nPara configurar un pipeline con Jenkins, se necesitan plugins como Kitematic, Docker Pipeline y Kubernetes Plugin. En el archivo `Jenkinsfile` se define la configuración del pipeline, incluyendo las tareas anteriores.\n\nComo ejemplo práctico, supongamos que tenemos un proyecto de una aplicación web en Node.js y queremos automatizar su despliegue en Kubernetes con Jenkins:\n\n1. Instalar Jenkins y los plugins necesarios.\n2. Crear un nuevo pipeline y definir las tareas anteriores en el archivo `Jenkinsfile`.\n3. Configurar la integración del repositorio de código fuente con Jenkins para que se ejecute automáticamente al hacer push a master.\n4. Construir una imagen Docker del proyecto, utilizando un Dockerfile en el repositorio.\n5. Configurar un cluster Kubernetes y crear un despliegue de la aplicación mediante kubectl o Helm.\n6. Definir las pruebas unitarias y integrales en el pipeline para garantizar la calidad del código antes del despliegue.\n7. Configurar el despliegue final en el entorno de producción.\n\nLas mejores prácticas incluyen:\n\n1. Seguir las buenas prácticas de CI/CD, como la separación entre entornos de desarrollo, staging y producción.\n2. Utilizar imágenes Docker con las dependencias necesarias para garantizar que el despliegue sea consistente.\n3. Realizar pruebas unitarias y integrales en cada commit para detectar errores temprano.\n4. Utilizar herramientas como Helm o kubectl para simplificar la configuración de los despliegues en Kubernetes.\n5. Seguir las mejores prácticas de seguridad, como la limitación de acceso a los recursos y el uso de certificados SSL.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:33:03.593Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3s971f8yrv",
+      "text": " P1: ¿Qué es la automatización de despliegue de Kubernetes con pipelines CI/CD?\nR1: La automatización de despliegue de Kubernetes con pipelines CI/CD consiste en integrar la infraestructura de Kubernetes en el ciclo de vida del software para automatizar el despliegue, escalado y actualización de aplicaciones.\n\nP2: ¿Cómo se pueden configurar las tareas de un pipeline con Jenkins?\nR2: Las tareas de un pipeline con Jenkins se pueden definir en un archivo `Jenkinsfile`, donde se incluye la configuración del pipeline, incluyendo las tareas como el clonado del repositorio de código fuente, la compilación y pruebas unitarias en el entorno local, la creación de una imagen Docker con la aplicación compilada, el despliegue de la imagen Docker en un cluster Kubernetes mediante kubectl o Helm, las pruebas integrales en un ambiente de staging y el despliegue final en el entorno de producción.\n\nP3: ¿Qué mejores prácticas se deben seguir para garantizar la seguridad al automatizar el despliegue de una aplicación web en Kubernetes con Jenkins?\nR3: Las mejores prácticas incluyen seguir las buenas prácticas de CI/CD, como la separación entre entornos de desarrollo, staging y producción. Utilizar imágenes Docker con las dependencias necesarias para garantizar que el despliegue sea consistente. Realizar pruebas unitarias y integrales en cada commit para detectar errores temprano. Utilizar herramientas como Helm o kubectl para simplificar la configuración de los despliegues en Kubernetes. Seguir las mejores prácticas de seguridad, como la limitación de acceso a los recursos y el uso de certificados SSL.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:33:09.987Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3smn8qskmk",
+      "text": " K3s es una versión ligera de Kubernetes optimizada para dispositivos IoT y edge computing. Se implementa mediante la ejecución del binario en los nodos del clúster y su configuración a través de un archivo YAML.\n\nPara instalar K3s, descarga el binario desde la página oficial (https://rancher.com/docs/k3s/latest/en/installation/) y ejecuta el siguiente comando en cada nodo:\n```bash\ncurl -sfL https://get.k3s.io | sh -\n```\nEl comando anterior instala K3s con la opción `server --node-taint CriticalAddonsOnly=true:NoExecute` que evita que se ejecuten addons críticos en el nodo.\n\nPara configurar un clúster, crea un archivo YAML con la siguiente estructura y personaliza los parámetros según tus necesidades:\n```yaml\napiVersion: k3s.io/v1alpha2\nkind: ClusterConfig\nserver:\n  enable: true\n  external:\n    address: <IP_SERVER>\n    port: 6443\n    advertise-address: <IP_ADVERTISE>\n    listen-address: 0.0.0.0\nauthentication:\n  apiServer:\n    enable: true\n    token: \"<TOKEN>\"\n    serviceAccountSigningKey: \"\"\nnodeRegistration:\n  kubeletExtraArgs:\n    node-labels: \"role=worker\"\n```\nDespués de crear el archivo, ejecuta el comando siguiente en cada nodo para instalar K3s con la configuración del clúster:\n```bash\ncurl -sfL https://get.k3s.io | K3S_URL=https://<IP_SERVER>:6443 K3S_TOKEN=<TOKEN> sh -\n```\nPara verificar la instalación, ejecuta el siguiente comando en cualquier nodo:\n```bash\nsudo kubectl get nodes\n```\nLas mejores prácticas incluyen utilizar una red segura y proteger las credenciales de acceso a Kubernetes. También es recomendable monitorizar el clúster y los pods para garantizar su funcionamiento correcto.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:43:37.514Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3smql4p38y",
+      "text": " P1: ¿Qué es K3s y por qué es útil en IoT y edge computing?\nR1: K3s es una versión ligera de Kubernetes optimizada para dispositivos IoT y edge computing. Es útil porque permite ejecutar aplicaciones contenedorizadas en estos dispositivos con un consumo mínimo de recursos.\n\nP2: ¿Cómo se instala K3s en cada nodo del clúster?\nR2: Para instalar K3s en cada nodo, descarga el binario desde la página oficial y ejecuta el siguiente comando: `curl -sfL https://get.k3s.io | sh -`. La opción `server --node-taint CriticalAddonsOnly=true:NoExecute` evita que se ejecuten addons críticos en el nodo.\n\nP3: ¿Cómo se configura un clúster de K3s?\nR3: Para configurar un clúster, crea un archivo YAML con la estructura indicada y personaliza los parámetros según tus necesidades. Después de crear el archivo, ejecuta el comando siguiente en cada nodo para instalar K3s con la configuración del clúster: `curl -sfL https://get.k3s.io | K3S_URL=https://<IP_SERVER>:6443 K3S_TOKEN=<TOKEN> sh -`.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Kubernetes cluster setup and management with K3s",
+        "source": "self-study-qa",
+        "studySession": 1
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:43:41.848Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3smzfj2l7a",
+      "text": " Automatización de despliegue de Kubernetes con pipeline de integración-entrega continua (CI/CD) implica la automatización del proceso de implementación de aplicaciones en un ambiente Kubernetes mediante el uso de herramientas de CI/CD. Esto permite una entrega más rápida y eficiente de software, reduciendo errores humanos y aumentando la seguridad.\n\nPara implementar automatización de despliegue de Kubernetes con CI/CD, se utilizan pipeline de herramientas como Jenkins, GitLab CI o CircleCI entre otros. El proceso general consiste en:\n\n1. Versionado del código fuente y configuración mediante un sistema de control de versiones (Git).\n2. Definición de la pipeline en un archivo YAML en el repositorio de código fuente.\n3. Integración continua: El pipeline se ejecuta automáticamente cada vez que se hace un push a un branch específico del repositorio.\n4. Pruebas unitarias y funcionales.\n5. Despliegue en Kubernetes mediante comandos kubectl o herramientas como Helm, FluxCD o ArgoCD.\n6. Implementación continua: El despliegue se automatiza para que se realice cada vez que se hace un push a la rama principal del repositorio.\n7. Monitorización y seguimiento de los despliegues en herramientas como Prometheus, Grafana o Kibana.\n\nPor ejemplo, con Jenkins y Helm, el archivo YAML de pipeline podría tener el siguiente contenido:\n```yaml\npipeline {\n    agent any\n    stages {\n        stage('Build') {\n            steps {\n                sh 'helm build'\n            }\n        }\n        stage('Deploy') {\n            steps {\n                sh 'kubectl apply -f helm/myapp-deployment.yaml'\n            }\n        }\n    }\n}\n```\nEn esta configuración, el pipeline se ejecuta en cualquier agente disponible, construye la aplicación mediante Helm y luego despliega la aplicación en Kubernetes mediante kubectl.\n\nLas mejores prácticas incluyen:\n- Utilizar imágenes de contenedor Docker para las aplicaciones y herramientas de CI/CD, para garantizar que el despliegue sea consistente entre diferentes entornos.\n- Seguir las mejores prácticas de seguridad en Kubernetes, como la restricción de acceso a los clústeres y la utilización de secretos para almacenar credenciales sensibles.\n- Utilizar herramientas de monitorización y seguimiento para garantizar que el despliegue sea exitoso y detectar errores en tiempo real.\n- Utilizar imágenes de contenedor Docker con la misma versión de Kubernetes para garantizar que el despliegue sea consistente entre diferentes entornos.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:43:53.311Z",
+      "accessCount": 0
+    },
+    {
+      "id": "mr3sn5uwp6h1",
+      "text": " P1: ¿Qué es la automatización de despliegue de Kubernetes con CI/CD?\nR1: La automatización de despliegue de Kubernetes con CI/CD es el proceso de implementación de aplicaciones en un ambiente Kubernetes mediante la utilización de herramientas de integración-entrega continua (CI/CD). Este proceso permite una entrega más rápida y eficiente de software, reduciendo errores humanos y aumentando la seguridad.\n\nP2: ¿Cuáles son los pasos generales en el proceso de automatización de despliegue de Kubernetes con CI/CD?\nR2: Los pasos generales en el proceso de automatización de despliegue de Kubernetes con CI/CD incluyen: versionado del código fuente y configuración mediante un sistema de control de versiones (Git), definición de la pipeline en un archivo YAML en el repositorio de código fuente, integración continua, pruebas unitarias y funcionales, despliegue en Kubernetes mediante comandos kubectl o herramientas como Helm, FluxCD o ArgoCD, implementación continua y monitorización y seguimiento de los despliegues en herramientas como Prometheus, Grafana o Kibana.\n\nP3: ¿Qué son las mejores prácticas para la automatización de despliegue de Kubernetes con CI/CD?\nR3: Las mejores prácticas incluyen utilizar imágenes de contenedor Docker para las aplicaciones y herramientas de CI/CD, seguir las mejores prácticas de seguridad en Kubernetes, como la restricción de acceso a los clústeres y la utilización de secretos para almacenar credenciales sensibles, utilizar herramientas de monitorización y seguimiento para garantizar que el despliegue sea exitoso y detectar errores en tiempo real, y utilizar imágenes de contenedor Docker con la misma versión de Kubernetes para garantizar que el despliegue sea consistente entre diferentes entornos.",
+      "category": "knowledge",
+      "metadata": {
+        "topic": "Automating Kubernetes deployment with CI/CD pipelines",
+        "source": "self-study-qa",
+        "studySession": 2
+      },
+      "embedding": null,
+      "createdAt": "2026-07-02T17:44:01.640Z",
+      "accessCount": 0
+    }
+  ],
+  "version": 2
+}
