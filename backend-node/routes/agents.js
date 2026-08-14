@@ -32,8 +32,8 @@ async function precompileBinaries() {
   console.log('[Agent] Pre-compilando agentes para todas las plataformas...');
   fs.mkdirSync(CACHE_DIR, { recursive: true });
 
-  // Ruta absoluta al binario de Go
-  const goCmd = '/usr/local/go/bin/go';
+  // Ruta absoluta al binario de Go (instalado con apk)
+  const goCmd = '/usr/bin/go';
 
   const results = await Promise.allSettled(
     Object.entries(PLATFORMS).map(async ([name, plat]) => {
@@ -399,7 +399,7 @@ function handleAgentDownload(req, res) {
       : `SecureLab-Agent-${platform}.tar.gz`;
     const archivePath = path.join(os.tmpdir(), archiveName);
 
-    // Ruta absoluta a wixl
+    // Ruta absoluta a wixl (instalado con apk)
     const wixlCmd = '/usr/bin/wixl';
 
     if (platform === 'win-x64') {
