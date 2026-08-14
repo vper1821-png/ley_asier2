@@ -29,4 +29,5 @@ COPY --from=agent-builder /out/ /app/agent-bin/
 COPY agent-go /app/agent-go
 
 EXPOSE 3838
+USER root   
 CMD ["node", "server.js"]
