@@ -357,7 +357,7 @@ function handleAgentDownload(req, res) {
     const archivePath = path.join(os.tmpdir(), archiveName);
 
     if (platform === 'win-x64') {
-      const wxsPath = path.resolve(__dirname, '../../agent-go/installer/product.wxs');
+      const wxsPath = path.resolve(__dirname, '../agent-go/installer/product.wxs');
       if (!fs.existsSync(wxsPath)) {
         throw new Error(`No se encontró el archivo .wxs: ${wxsPath}`);
       }
