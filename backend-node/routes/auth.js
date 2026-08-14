@@ -6,7 +6,12 @@ import { User, AuditLog } from '../models/db.js';
 import { validateToken, isAdmin } from '../middleware/auth.js';
 
 const router = Router();
+// --- Desactivamos Turnstile para desarrollo ---
 async function verifyTurnstile(captchaToken) {
+  // DESACTIVADO PARA PRUEBAS LOCALES
+  return true;
+  
+  /* Código original (actívalo en producción)
   const secretKey = process.env.TURNSTILE_SECRET_KEY;
   if (!secretKey || !captchaToken) return false;
   try {
@@ -18,6 +23,7 @@ async function verifyTurnstile(captchaToken) {
     const data = await response.json();
     return data.success === true;
   } catch (e) { return false; }
+  */
 }
 
 
