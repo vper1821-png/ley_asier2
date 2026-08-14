@@ -10,7 +10,7 @@ env:
   # Nota: github.repository será "ey_asier2" (o el nombre que tenga tu repo)
   BACKEND_IMAGE: ghcr.io/${{ github.repository }}/backend
   FRONTEND_IMAGE: ghcr.io/${{ github.repository }}/frontend
-  AGENT_IMAGE: ghcr.io/${{ github.repository }}/agent
+  #AGENT_IMAGE: ghcr.io/${{ github.repository }}/agent
 
 jobs:
   build-and-push:
@@ -59,13 +59,13 @@ jobs:
           cache-to: type=gha,mode=max
 
       # Agent Go
-      - name: Build and push Agent
-        uses: docker/build-push-action@v5
-        with:
-          context: ./agent-go
-          push: true
-          tags: |
-            ${{ env.AGENT_IMAGE }}:latest
-            ${{ env.AGENT_IMAGE }}:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      #- name: Build and push Agent
+       # uses: docker/build-push-action@v5
+       # with:
+       #   context: ./agent-go
+        #  push: true
+       #   tags: |
+        #    ${{ env.AGENT_IMAGE }}:latest
+       #     ${{ env.AGENT_IMAGE }}:${{ github.sha }}
+      #    cache-from: type=gha
+      #    cache-to: type=gha,mode=max
