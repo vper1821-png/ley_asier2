@@ -1,4 +1,4 @@
-# ── Etapa 1: compilar el agente Go para todas las plataformas ──
+# ── Etapa 1: compilar el agente Go ──
 FROM golang:1.25-alpine AS agent-builder
 WORKDIR /src
 COPY agent-go/go.mod agent-go/go.sum ./
@@ -14,13 +14,8 @@ RUN mkdir -p /out && \
 FROM node:22-alpine
 WORKDIR /app
 
-# Instala Go (misma versión que en agent-builder)
-RUN apk add --no-cache curl && \
-    curl -L https://go.dev/dl/go1.25.0.linux-amd64.tar.gz | tar -C /usr/local -xz
-ENV PATH="/usr/local/go/bin:${PATH}"
-
-# Instala msitools (wixl) y tar para empaquetar agentes
-RUN apk add --no-cache msitools tar
+# Instala Go usando el gestor de paquetes de Alpine (versión estable)
+RUN apk add --no-cache go msitools tar
 
 # Copia el backend
 COPY package*.json ./
