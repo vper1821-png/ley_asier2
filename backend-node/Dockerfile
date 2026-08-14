@@ -15,7 +15,7 @@ FROM node:22-alpine
 WORKDIR /app
 
 # Copia el backend (código + dependencias)
-COPY backend-node/package*.json ./
+COPY package*.json ./
 RUN npm ci --only=production
 COPY . .
 
