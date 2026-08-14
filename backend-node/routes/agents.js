@@ -32,10 +32,13 @@ async function precompileBinaries() {
   console.log('[Agent] Pre-compilando agentes para todas las plataformas...');
   fs.mkdirSync(CACHE_DIR, { recursive: true });
 
+  // Ruta absoluta al binario de Go
+  const goCmd = '/usr/local/go/bin/go';
+
   const results = await Promise.allSettled(
     Object.entries(PLATFORMS).map(async ([name, plat]) => {
       const outFile = path.join(CACHE_DIR, `agent-${name}${plat.ext}`);
-      execFileSync('go', ['build', '-ldflags', '-s -w', '-o', outFile, '.'], {
+      execFileSync(goCmd, ['build', '-ldflags', '-s -w', '-o', outFile, '.'], {
         cwd: AGENT_DIR,
         env: { ...process.env, GOOS: plat.goos, GOARCH: plat.goarch, CGO_ENABLED: '0' },
         stdio: 'pipe',
@@ -396,10 +399,13 @@ function handleAgentDownload(req, res) {
       : `SecureLab-Agent-${platform}.tar.gz`;
     const archivePath = path.join(os.tmpdir(), archiveName);
 
+    // Ruta absoluta a wixl
+    const wixlCmd = '/usr/bin/wixl';
+
     if (platform === 'win-x64') {
       const wxsPath = path.resolve(__dirname, '../../agent-go/installer/product.wxs');
       execSync(
-        `wixl -D Version=2.0.0 -D ExeSource="${binaryPath}" -D ConfigSource="${path.join(dlDir, 'config.json')}" -o "${archivePath}" --arch x64 "${wxsPath}"`,
+        `${wixlCmd} -D Version=2.0.0 -D ExeSource="${binaryPath}" -D ConfigSource="${path.join(dlDir, 'config.json')}" -o "${archivePath}" --arch x64 "${wxsPath}"`,
         { stdio: 'pipe', timeout: 60000 }
       );
     } else {
