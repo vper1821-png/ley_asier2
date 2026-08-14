@@ -14,15 +14,18 @@ RUN mkdir -p /out && \
 FROM node:22-alpine
 WORKDIR /app
 
-# Copia el backend (código + dependencias)
+# Instala Go (misma versión que usas en agent-builder)
+RUN apk add --no-cache curl && \
+    curl -L https://go.dev/dl/go1.25.0.linux-amd64.tar.gz | tar -C /usr/local -xz
+ENV PATH="/usr/local/go/bin:${PATH}"
+
+# Copia el backend
 COPY package*.json ./
 RUN npm ci --only=production
 COPY . .
 
-# Copia los binarios pre‑compilados del agente
+# Copia los binarios pre‑compilados y el código fuente
 COPY --from=agent-builder /out/ /app/agent-bin/
-
-# (Opcional) También copia el código fuente del agente si necesitas recompilar bajo demanda
 COPY agent-go /app/agent-go
 
 EXPOSE 3838
