@@ -330,8 +330,7 @@ function handleAgentDownload(req, res) {
 
   try {
     const agentAPIBase = `${CONFIG.API_BASE_URL}/api/agents`;
-    // Usar un directorio fijo para evitar problemas de rutas
-    const dlDir = '/tmp/agent-dl';
+    const dlDir = path.join(os.tmpdir(), `agent-dl-${Date.now()}`);
     fs.mkdirSync(dlDir, { recursive: true });
 
     const binaryName = `securelab-agent${plat.ext}`;
@@ -347,20 +346,36 @@ function handleAgentDownload(req, res) {
     const configPath = path.join(dlDir, 'config.json');
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 
+    // Verificar que el config.json se haya creado
+    if (!fs.existsSync(configPath)) {
+      throw new Error('No se pudo crear config.json');
+    }
+
     const archiveName = platform === 'win-x64'
       ? `SecureLab-Agent-${platform}.msi`
       : `SecureLab-Agent-${platform}.tar.gz`;
     const archivePath = path.join(os.tmpdir(), archiveName);
 
-    const wixlCmd = '/usr/bin/wixl';
-
     if (platform === 'win-x64') {
       const wxsPath = path.resolve(__dirname, '../../agent-go/installer/product.wxs');
-      // Usar las rutas correctas
-      const cmd = `${wixlCmd} -D Version=2.0.0 -D ExeSource="${binaryPath}" -D ConfigSource="${configPath}" -o "${archivePath}" --arch x64 "${wxsPath}"`;
-      console.log('[Agent Download] Running:', cmd);
-      execSync(cmd, { stdio: 'pipe', timeout: 60000, shell: '/bin/sh' });
+      if (!fs.existsSync(wxsPath)) {
+        throw new Error(`No se encontró el archivo .wxs: ${wxsPath}`);
+      }
+
+      // Usar execFileSync con array de argumentos (más seguro que una string)
+      const wixlCmd = '/usr/bin/wixl';
+      const args = [
+        '-D', `Version=2.0.0`,
+        '-D', `ExeSource=${binaryPath}`,
+        '-D', `ConfigSource=${configPath}`,
+        '-o', archivePath,
+        '--arch', 'x64',
+        wxsPath
+      ];
+      console.log('[Agent Download] Ejecutando:', wixlCmd, args.join(' '));
+      execFileSync(wixlCmd, args, { stdio: 'pipe', timeout: 60000 });
     } else {
+      // Para otras plataformas, se usa tar
       const cmd = `tar czf "${archivePath}" -C "${dlDir}" "${binaryName}" "config.json"`;
       execSync(cmd, { stdio: 'pipe', shell: '/bin/sh' });
     }
@@ -382,6 +397,7 @@ function handleAgentDownload(req, res) {
       console.error('[Agent Download] stderr:', stderr);
       if (stderr) msg = stderr;
     }
+    console.error('[Agent Download] Error completo:', err);
     res.status(500).json({ error: `Error preparando agente: ${msg}` });
   }
 }
