@@ -330,7 +330,8 @@ function handleAgentDownload(req, res) {
 
   try {
     const agentAPIBase = `${CONFIG.API_BASE_URL}/api/agents`;
-    const dlDir = path.join(os.tmpdir(), `agent-dl-${Date.now()}`);
+    // Usar un directorio fijo para evitar problemas de rutas
+    const dlDir = '/tmp/agent-dl';
     fs.mkdirSync(dlDir, { recursive: true });
 
     const binaryName = `securelab-agent${plat.ext}`;
@@ -343,7 +344,8 @@ function handleAgentDownload(req, res) {
       heartbeat_interval: 5,
       agent_version: "2.0.0"
     };
-    fs.writeFileSync(path.join(dlDir, 'config.json'), JSON.stringify(config, null, 2));
+    const configPath = path.join(dlDir, 'config.json');
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 
     const archiveName = platform === 'win-x64'
       ? `SecureLab-Agent-${platform}.msi`
@@ -354,7 +356,9 @@ function handleAgentDownload(req, res) {
 
     if (platform === 'win-x64') {
       const wxsPath = path.resolve(__dirname, '../../agent-go/installer/product.wxs');
-      const cmd = `${wixlCmd} -D Version=2.0.0 -D ExeSource="${binaryPath}" -D ConfigSource="${path.join(dlDir, 'config.json')}" -o "${archivePath}" --arch x64 "${wxsPath}"`;
+      // Usar las rutas correctas
+      const cmd = `${wixlCmd} -D Version=2.0.0 -D ExeSource="${binaryPath}" -D ConfigSource="${configPath}" -o "${archivePath}" --arch x64 "${wxsPath}"`;
+      console.log('[Agent Download] Running:', cmd);
       execSync(cmd, { stdio: 'pipe', timeout: 60000, shell: '/bin/sh' });
     } else {
       const cmd = `tar czf "${archivePath}" -C "${dlDir}" "${binaryName}" "config.json"`;
@@ -372,7 +376,12 @@ function handleAgentDownload(req, res) {
       try { fs.unlinkSync(archivePath); } catch {}
     });
   } catch (err) {
-    const msg = err.stderr ? err.stderr.toString().trim() : err.message;
+    let msg = err.message;
+    if (err.stderr) {
+      const stderr = err.stderr.toString().trim();
+      console.error('[Agent Download] stderr:', stderr);
+      if (stderr) msg = stderr;
+    }
     res.status(500).json({ error: `Error preparando agente: ${msg}` });
   }
 }
