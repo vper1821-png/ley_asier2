@@ -1,11 +1,9 @@
 FROM golang:1.24-alpine AS builder
 WORKDIR /app
 COPY go.mod go.sum ./
-RUN go mod download
+RUN go mod download -x
 COPY . .
-# Sincroniza las dependencias con el código fuente
 RUN go mod tidy
-# Compila el binario para Linux
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o /invisia-agent .
 
 FROM alpine:latest
