@@ -1,4 +1,4 @@
-# ── Etapa 1: compilar el agente Go ──
+# ── Etapa 1: compilar el agente Go para todas las plataformas ──
 FROM golang:1.25-alpine AS agent-builder
 WORKDIR /src
 COPY agent-go/go.mod agent-go/go.sum ./
@@ -19,7 +19,7 @@ RUN apk add --no-cache curl && \
     curl -L https://go.dev/dl/go1.25.0.linux-amd64.tar.gz | tar -C /usr/local -xz
 ENV PATH="/usr/local/go/bin:${PATH}"
 
-# Instala msitools (wixl) y otras dependencias necesarias para empaquetar MSI
+# Instala msitools (wixl) y tar para empaquetar agentes
 RUN apk add --no-cache msitools tar
 
 # Copia el backend
@@ -27,9 +27,10 @@ COPY package*.json ./
 RUN npm ci --only=production
 COPY . .
 
-# Copia los binarios pre‑compilados y el código fuente
+# Copia los binarios pre‑compilados y el código fuente del agente
 COPY --from=agent-builder /out/ /app/agent-bin/
 COPY agent-go /app/agent-go
 
 EXPOSE 3838
+USER root
 CMD ["node", "server.js"]
