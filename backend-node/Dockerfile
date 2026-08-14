@@ -17,7 +17,7 @@ WORKDIR /app
 # Copia el backend (código + dependencias)
 COPY backend-node/package*.json ./
 RUN npm ci --only=production
-COPY backend-node/ .
+COPY . .
 
 # Copia los binarios pre‑compilados del agente
 COPY --from=agent-builder /out/ /app/agent-bin/
