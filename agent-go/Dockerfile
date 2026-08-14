@@ -3,7 +3,11 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
+# Sincroniza las dependencias con el código fuente
+RUN go mod tidy
+# Compila el binario para Linux
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o /invisia-agent .
+
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 COPY --from=builder /invisia-agent /invisia-agent
