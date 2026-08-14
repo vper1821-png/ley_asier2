@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
-import { execSync } from 'child_process';
+import { execFileSync, execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
@@ -346,7 +346,6 @@ function handleAgentDownload(req, res) {
     const configPath = path.join(dlDir, 'config.json');
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 
-    // Verificar que el config.json se haya creado
     if (!fs.existsSync(configPath)) {
       throw new Error('No se pudo crear config.json');
     }
@@ -362,7 +361,6 @@ function handleAgentDownload(req, res) {
         throw new Error(`No se encontró el archivo .wxs: ${wxsPath}`);
       }
 
-      // Usar execFileSync con array de argumentos (más seguro que una string)
       const wixlCmd = '/usr/bin/wixl';
       const args = [
         '-D', `Version=2.0.0`,
@@ -375,7 +373,6 @@ function handleAgentDownload(req, res) {
       console.log('[Agent Download] Ejecutando:', wixlCmd, args.join(' '));
       execFileSync(wixlCmd, args, { stdio: 'pipe', timeout: 60000 });
     } else {
-      // Para otras plataformas, se usa tar
       const cmd = `tar czf "${archivePath}" -C "${dlDir}" "${binaryName}" "config.json"`;
       execSync(cmd, { stdio: 'pipe', shell: '/bin/sh' });
     }
