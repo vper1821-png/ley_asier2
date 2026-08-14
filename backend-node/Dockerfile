@@ -1,5 +1,5 @@
 # ── Etapa 1: compilar el agente Go ──
-FROM golang:1.24-alpine AS agent-builder
+FROM golang:1.25-alpine AS agent-builder
 WORKDIR /src
 COPY agent-go/go.mod agent-go/go.sum ./
 RUN go mod download
